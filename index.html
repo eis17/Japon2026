@@ -92,9 +92,9 @@ html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-seri
 .tb-ok{background:rgba(61,138,90,.18);color:var(--moegi2)}
 
 /* ── CITY DETAIL ── */
-.city-detail{display:none;flex-direction:column;height:100%}
+.city-detail{display:none;flex-direction:column;flex:1;min-height:0;overflow:hidden;}
 .city-detail.active{display:flex}
-.city-detail-content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch; padding-bottom: 40px;}
+.city-detail-content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:100px;}
 .cd-back{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(--bg);border-bottom:1px solid var(--bdr);cursor:pointer;color:var(--aka);font-size:13px;font-weight:500;flex-shrink:0}
 .cd-hero{background:linear-gradient(160deg,#1a0505 0%,var(--bg) 70%);padding:18px 14px 14px}
 .cd-kan{font-family:'Shippori Mincho',serif;font-size:48px;font-weight:800;color:var(--aka);line-height:1}
@@ -908,7 +908,13 @@ function closeCity() {
 }
 
 function toggleDay(id) {
-  document.getElementById(id).classList.toggle('open');
+  const bloque = document.getElementById(id);
+  bloque.classList.toggle('open');
+
+  // Esto fuerza a la pantalla a seguir al desplegable sin saltos bruscos
+  setTimeout(() => {
+    bloque.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 50);
 }
 
 function toggleItem(el, ck, dn, n) {
