@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Japón 2026">
+<meta name="theme-color" content="#0d0d0d">
+<title>日本 · Japón 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0d0d0d; --bg2:#161616; --bg3:#1f1f1f; --bg4:#272727;
+  --card:#1a1a1a; --bdr:rgba(255,255,255,0.07); --bdr2:rgba(255,255,255,0.13);
+  --aka:#d93030; --aka2:#ff5252; --kin:#c8a030; --kin2:#e8c060;
+  --moegi:#3d8a5a; --moegi2:#5cb87a; --kon:#3a60b0; --kon2:#6090e0;
+  --text:#ede8e0; --t2:rgba(237,232,224,0.55); --t3:rgba(237,232,224,0.28);
+  --star:#f0c040;
+  --safe-t:env(safe-area-inset-top,0px); --safe-b:env(safe-area-inset-bottom,0px);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;height:100%;overflow:hidden;overscroll-behavior:none}
+.app{display:flex;flex-direction:column;height:100dvh;height:100vh}
+
+/* ── HEADER ── */
+.hdr{padding:calc(var(--safe-t) + 10px) 14px 0;background:var(--bg);border-bottom:1px solid var(--bdr);flex-shrink:0;z-index:20}
+.hdr-top{display:flex;align-items:center;gap:10px;padding-bottom:10px}
+.hdr-logo{font-family:'Shippori Mincho',serif;font-size:22px;color:var(--aka);line-height:1;flex-shrink:0}
+.hdr-title{font-size:15px;font-weight:600;color:var(--text);line-height:1.1}
+.hdr-sub{font-size:10px;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase}
+.hdr-prog{display:flex;flex-direction:column;align-items:flex-end;gap:3px;margin-left:auto}
+.prog-bar{width:56px;height:2px;background:var(--bdr2);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--aka),var(--kin));border-radius:2px;transition:width .5s ease;width:0%}
+.prog-pct{font-size:9px;color:var(--kin);letter-spacing:1px}
+
+/* ── SEARCH ── */
+.search-row{padding:8px 14px 10px;position:relative}
+.search-ico{position:absolute;left:26px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none;z-index:1}
+.search-inp{width:100%;background:var(--bg3);border:1px solid var(--bdr2);border-radius:10px;padding:9px 12px 9px 36px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .2s}
+.search-inp:focus{border-color:var(--aka)}
+.search-inp::placeholder{color:var(--t3)}
+
+/* ── FILTERS ── */
+.filters{display:flex;gap:6px;padding:0 14px 10px;overflow-x:auto;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.fil{flex-shrink:0;font-size:11px;font-weight:500;padding:5px 12px;border-radius:20px;border:1px solid var(--bdr2);color:var(--t2);background:transparent;cursor:pointer;transition:all .15s;white-space:nowrap}
+.fil.active{background:var(--aka);border-color:var(--aka);color:#fff}
+.fil:active{opacity:.7}
+
+/* ── CONTENT ── */
+.content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
+.screen{display:none}
+.screen.active{display:block;animation:fadeUp .2s ease-out}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── HOME ── */
+.home-hero{padding:16px 14px 12px;background:linear-gradient(160deg,#1a0808 0%,var(--bg) 65%);position:relative;overflow:hidden}
+.home-hero::after{content:'日';position:absolute;right:-8px;top:-12px;font-family:'Shippori Mincho',serif;font-size:90px;color:rgba(217,48,48,.05);line-height:1;pointer-events:none}
+.home-chip{display:inline-flex;align-items:center;gap:5px;font-size:10px;letter-spacing:2px;color:var(--aka2);text-transform:uppercase;background:rgba(217,48,48,.1);border:1px solid rgba(217,48,48,.2);border-radius:20px;padding:3px 10px;margin-bottom:10px}
+.home-title{font-family:'Shippori Mincho',serif;font-size:22px;font-weight:800;color:var(--text);line-height:1.2}
+.home-sub{font-size:12px;color:var(--t2);margin-top:4px;line-height:1.5}
+.home-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
+.home-stat{background:var(--bg3);border:1px solid var(--bdr);border-radius:10px;padding:8px 10px;text-align:center}
+.home-stat .n{font-family:'Shippori Mincho',serif;font-size:18px;font-weight:800;color:var(--kin)}
+.home-stat .l{font-size:9px;color:var(--t3);letter-spacing:1px;text-transform:uppercase;margin-top:1px}
+.sec-lbl{padding:14px 14px 6px;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--t3)}
+.city-grid{padding:0 14px 6px;display:flex;flex-direction:column;gap:8px}
+.city-card{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;cursor:pointer;transition:border-color .15s,transform .1s}
+.city-card:active{transform:scale(.98);border-color:var(--aka)}
+.city-inner{display:flex;align-items:center;gap:11px;padding:12px 13px}
+.city-kan{font-family:'Shippori Mincho',serif;font-size:30px;font-weight:800;color:var(--aka);line-height:1;min-width:40px;text-align:center}
+.city-det{flex:1}
+.city-nm{font-size:15px;font-weight:600;color:var(--text)}
+.city-dt{font-size:10px;color:var(--t3);margin-top:1px}
+.city-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.ctag{font-size:9px;padding:2px 7px;border-radius:6px;background:rgba(255,255,255,.05);color:var(--t2)}
+.ctag.r{background:rgba(217,48,48,.14);color:var(--aka2)}
+.ctag.g{background:rgba(61,138,90,.14);color:var(--moegi2)}
+.ctag.k{background:rgba(200,160,48,.14);color:var(--kin2)}
+.city-arr{color:var(--t3);font-size:16px}
+.tr-mini{margin:0 14px 14px;background:var(--bg2);border:1px solid var(--bdr);border-radius:13px;overflow:hidden}
+.tr-row{display:flex;align-items:center;gap:9px;padding:10px 13px;border-bottom:1px solid var(--bdr);cursor:pointer;transition:background .15s}
+.tr-row:last-child{border-bottom:none}
+.tr-row:active{background:var(--bg3)}
+.tr-day{font-size:10px;color:var(--aka);font-weight:600;min-width:30px}
+.tr-route{font-size:12px;color:var(--text);flex:1}
+.tr-price{font-size:11px;color:var(--kin);font-weight:600}
+.tr-badge{font-size:9px;padding:2px 7px;border-radius:5px;font-weight:600;letter-spacing:.3px}
+.tb-now{background:rgba(217,48,48,.18);color:var(--aka2)}
+.tb-ok{background:rgba(61,138,90,.18);color:var(--moegi2)}
+
+/* ── CITY DETAIL ── */
+.city-detail{display:none;flex-direction:column;height:100%}
+.city-detail.active{display:flex}
+.city-detail-content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.cd-back{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(--bg);border-bottom:1px solid var(--bdr);cursor:pointer;color:var(--aka);font-size:13px;font-weight:500;flex-shrink:0}
+.cd-hero{background:linear-gradient(160deg,#1a0505 0%,var(--bg) 70%);padding:18px 14px 14px}
+.cd-kan{font-family:'Shippori Mincho',serif;font-size:48px;font-weight:800;color:var(--aka);line-height:1}
+.cd-nm{font-family:'Shippori Mincho',serif;font-size:22px;font-weight:800;color:var(--text);margin-top:3px}
+.cd-dt{font-size:10px;color:var(--t3);letter-spacing:2px;margin-top:3px;text-transform:uppercase}
+.cd-desc{font-size:12px;color:var(--t2);line-height:1.65;margin-top:9px}
+
+/* ── ZONE BLOCKS ── */
+.zone-block{margin:10px 14px 0}
+.zone-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--kin2);font-weight:600;padding:10px 0 6px;border-bottom:1px solid var(--bdr);margin-bottom:2px;display:flex;align-items:center;gap:6px}
+.zone-title::before{content:'';display:inline-block;width:3px;height:12px;background:var(--kin);border-radius:2px;flex-shrink:0}
+
+/* ── DAY BLOCKS ── */
+.day-block{margin:0 14px 9px;background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden}
+.day-hdr{display:flex;align-items:center;gap:11px;padding:12px 13px;cursor:pointer;transition:background .15s}
+.day-hdr:active{background:var(--bg3)}
+.day-num{font-family:'Shippori Mincho',serif;font-size:26px;font-weight:800;color:var(--kin);line-height:1;min-width:32px}
+.day-inf{flex:1}
+.day-date{font-size:9px;color:var(--aka2);letter-spacing:1px;text-transform:uppercase}
+.day-ttl{font-size:13px;font-weight:600;color:var(--text);margin-top:1px;line-height:1.3}
+.day-right{display:flex;align-items:center;gap:7px}
+.day-mbar{width:36px;height:2px;background:rgba(255,255,255,.1);border-radius:1px;overflow:hidden}
+.day-mfill{height:100%;background:var(--kin);border-radius:1px;transition:width .4s}
+.day-mpct{font-size:9px;color:var(--t3);min-width:24px;text-align:right}
+.day-chev{color:var(--t3);font-size:11px;transition:transform .3s}
+.day-block.open .day-chev{transform:rotate(180deg)}
+.day-body{display:none;padding-bottom:6px}
+.day-block.open .day-body{display:block}
+
+/* ── SECTION LABEL ── */
+.slbl{padding:9px 13px 3px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--t3);display:flex;align-items:center;gap:7px}
+.slbl::before{content:'';display:inline-block;width:10px;height:1px;background:var(--aka);flex-shrink:0}
+
+/* ── SOURCE DIVIDER ── */
+.src-divider{margin:6px 13px 2px;display:flex;align-items:center;gap:8px}
+.src-divider::before,.src-divider::after{content:'';flex:1;height:1px;background:var(--bdr)}
+.src-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--t3);white-space:nowrap;padding:0 4px}
+.src-label.milista{color:rgba(200,160,48,.6)}
+.src-label.japonismo{color:rgba(61,138,90,.6)}
+
+/* ── ITEM ── */
+.item{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;cursor:pointer;transition:background .15s;border-top:1px solid var(--bdr)}
+.item:active{background:var(--bg3)}
+.item.checked{opacity:.38}
+.item.checked .item-name{text-decoration:line-through}
+.item.hidden-filter{display:none}
+.icb{width:20px;height:20px;border:1.5px solid var(--bdr2);border-radius:5px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .2s;background:transparent}
+.item.checked .icb{background:var(--moegi);border-color:var(--moegi)}
+.item.checked .icb::after{content:'✓';color:#fff;font-size:11px;font-weight:700}
+.ibody{flex:1;min-width:0}
+
+/* ── ITEM META ROW ── */
+.item-meta{display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap}
+.item-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.3}
+.stars{font-size:11px;color:var(--star);letter-spacing:-1px;flex-shrink:0}
+.time-chip{font-size:9px;background:var(--bg4);border:1px solid var(--bdr);border-radius:4px;padding:1px 6px;color:var(--t3);flex-shrink:0}
+.item-desc{font-size:11px;color:var(--t2);line-height:1.55;margin-top:2px}
+.item-foot{display:flex;align-items:center;gap:6px;margin-top:7px;flex-wrap:wrap}
+
+/* ── BADGES ── */
+.badge{font-size:9px;padding:2px 7px;border-radius:5px;font-weight:600;letter-spacing:.3px;text-transform:uppercase}
+.b-food{background:rgba(61,138,90,.15);color:var(--moegi2)}
+.b-must{background:rgba(217,48,48,.15);color:var(--aka2)}
+.b-shop{background:rgba(200,160,48,.15);color:var(--kin2)}
+.b-photo{background:rgba(58,96,176,.15);color:var(--kon2)}
+.b-special{background:var(--aka);color:#fff}
+.b-matcha{background:rgba(61,138,90,.2);color:#7dcf9a}
+.b-tip{background:rgba(255,255,255,.06);color:var(--t3)}
+.b-milista{background:rgba(200,160,48,.12);color:var(--kin2);border:1px solid rgba(200,160,48,.25)}
+
+/* ── MAPS BUTTON ── */
+.maps-btn{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;color:#fff;background:var(--kon);border:none;border-radius:8px;padding:5px 12px;text-decoration:none;transition:all .15s;flex-shrink:0}
+.maps-btn:active{background:#2a4a90;transform:scale(.97)}
+
+/* ── TIP / ALERT ── */
+.tip-box{margin:7px 13px;background:rgba(200,160,48,.07);border:1px solid rgba(200,160,48,.18);border-left:3px solid var(--kin);border-radius:9px;padding:9px 11px}
+.tip-title{font-size:9px;color:var(--kin);letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;font-weight:700}
+.tip-text{font-size:11px;color:var(--t2);line-height:1.6}
+.alert-box{margin:7px 13px;background:rgba(217,48,48,.07);border:1px solid rgba(217,48,48,.18);border-left:3px solid var(--aka);border-radius:9px;padding:9px 11px}
+.alert-title{font-size:9px;color:var(--aka2);letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;font-weight:700}
+.alert-text{font-size:11px;color:var(--t2);line-height:1.6}
+
+/* ── TRANSPORT FULL ── */
+.tr-full{padding:14px}
+.tr-card{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:11px}
+.tr-card-hdr{background:var(--bg2);padding:11px 13px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--bdr)}
+.tr-day-big{font-family:'Shippori Mincho',serif;font-size:22px;font-weight:800;color:var(--kin);min-width:30px}
+.tr-hi{flex:1}
+.tr-hdate{font-size:10px;color:var(--t3)}
+.tr-htitle{font-size:13px;font-weight:600;color:var(--text)}
+.tr-rbadge{font-size:9px;padding:3px 8px;border-radius:6px;font-weight:700;letter-spacing:.3px}
+.rb-yes{background:rgba(217,48,48,.2);color:var(--aka2)}
+.rb-no{background:rgba(61,138,90,.2);color:var(--moegi2)}
+.tr-drow{padding:9px 13px;border-bottom:1px solid var(--bdr)}
+.tr-drow:last-child{border-bottom:none}
+.tr-dlbl{font-size:9px;color:var(--t3);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
+.tr-dval{font-size:13px;color:var(--text)}
+.tr-dval.price{color:var(--kin);font-weight:700;font-size:15px}
+.tr-steps{padding:9px 13px}
+.step{display:flex;gap:9px;padding:3px 0;align-items:flex-start}
+.step-dot{width:7px;height:7px;border-radius:50%;background:var(--aka);margin-top:4px;flex-shrink:0;position:relative}
+.step:not(:last-child) .step-dot::after{content:'';position:absolute;top:7px;left:3px;width:1px;height:16px;background:var(--bdr2)}
+.step-txt{font-size:12px;color:var(--t2);line-height:1.4}
+
+/* ── SEARCH RESULTS ── */
+.sr-wrap{padding:6px 14px 14px}
+.sr-item{background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:12px 13px;margin-bottom:7px;cursor:pointer;transition:border-color .15s}
+.sr-item:active{border-color:var(--aka)}
+.sr-city{font-size:9px;color:var(--aka2);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
+.sr-name{font-size:14px;font-weight:600;color:var(--text)}
+.sr-meta{display:flex;align-items:center;gap:6px;margin-top:3px}
+.sr-desc{font-size:11px;color:var(--t2);margin-top:3px;line-height:1.4}
+.sr-foot{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap;align-items:center}
+.no-res{text-align:center;padding:40px 20px;color:var(--t3);font-size:14px;line-height:1.8}
+
+/* ── TABS ── */
+.tabs{display:flex;background:var(--bg2);border-top:1px solid var(--bdr);padding-bottom:calc(var(--safe-b) + 4px);flex-shrink:0}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 4px 5px;cursor:pointer;color:var(--t3);transition:color .15s;position:relative}
+.tab.active{color:var(--aka)}
+.tab.active::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:20px;height:2px;background:var(--aka);border-radius:0 0 2px 2px}
+.tab-ico{font-size:19px;line-height:1}
+.tab-lbl{font-size:9px;letter-spacing:.3px;font-weight:500}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="hdr-top">
+      <div class="hdr-logo">日</div>
+      <div>
+        <div class="hdr-title">Japón 2026</div>
+        <div class="hdr-sub">11 – 24 Mayo</div>
+      </div>
+      <div class="hdr-prog">
+        <div class="prog-bar"><div class="prog-fill" id="gFill"></div></div>
+        <div class="prog-pct" id="gPct">0%</div>
+      </div>
+    </div>
+    <div class="search-row">
+      <span class="search-ico">🔍</span>
+      <input class="search-inp" id="searchInp" type="search" placeholder="Buscar restaurante, lugar, tienda..." autocomplete="off">
+    </div>
+    <div class="filters" id="filterBar">
+      <button class="fil active" data-f="all" onclick="setFilter('all')">Todo</button>
+      <button class="fil" data-f="food" onclick="setFilter('food')">🍽 Comer</button>
+      <button class="fil" data-f="matcha" onclick="setFilter('matcha')">🍵 Matcha</button>
+      <button class="fil" data-f="shop" onclick="setFilter('shop')">🛍 Compras</button>
+      <button class="fil" data-f="photo" onclick="setFilter('photo')">📸 Fotos</button>
+      <button class="fil" data-f="must" onclick="setFilter('must')">⭐ Esenciales</button>
+      <button class="fil" data-f="milista" onclick="setFilter('milista')">📋 Mi lista</button>
+    </div>
+  </div>
+
+  <!-- CITY DETAIL OVERLAY -->
+  <div class="city-detail" id="cityDetail">
+    <div class="cd-back" onclick="closeCity()">‹ Volver</div>
+    <div class="city-detail-content" id="cdContent"></div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="content" id="mainContent">
+
+    <!-- HOME -->
+    <div class="screen active" id="screen-hoy">
+      <div class="home-hero">
+        <div class="home-chip">✈ Japón 2026</div>
+        <div class="home-title">Cuaderno de Viaje</div>
+        <div class="home-sub">Toca una ciudad para ver su itinerario completo</div>
+        <div class="home-stats">
+          <div class="home-stat"><div class="n">14</div><div class="l">Días</div></div>
+          <div class="home-stat"><div class="n">6</div><div class="l">Ciudades</div></div>
+          <div class="home-stat"><div class="n" id="hPct">0%</div><div class="l">Hecho</div></div>
+        </div>
+      </div>
+      <div class="sec-lbl">Ciudades</div>
+      <div class="city-grid">
+        <div class="city-card" onclick="openCity('takayama')"><div class="city-inner"><div class="city-kan">高山</div><div class="city-det"><div class="city-nm">Takayama</div><div class="city-dt">11–12 Mayo · Alpes Japoneses</div><div class="city-tags"><span class="ctag r">Hidagyu ★</span><span class="ctag">Casco Edo</span><span class="ctag k">Sake</span></div></div><div class="city-arr">›</div></div></div>
+        <div class="city-card" onclick="openCity('shirakawa')"><div class="city-inner"><div class="city-kan">白川</div><div class="city-det"><div class="city-nm">Shirakawa-go</div><div class="city-dt">13 Mayo · Escala UNESCO</div><div class="city-tags"><span class="ctag r">UNESCO</span><span class="ctag">Gassho-zukuri</span></div></div><div class="city-arr">›</div></div></div>
+        <div class="city-card" onclick="openCity('kanazawa')"><div class="city-inner"><div class="city-kan">金沢</div><div class="city-det"><div class="city-nm">Kanazawa</div><div class="city-dt">13 noche – 14 Mayo</div><div class="city-tags"><span class="ctag r">Kenroku-en ★</span><span class="ctag k">Pan de oro</span><span class="ctag">Ninjadera</span></div></div><div class="city-arr">›</div></div></div>
+        <div class="city-card" onclick="openCity('kioto')"><div class="city-inner"><div class="city-kan">京都</div><div class="city-det"><div class="city-nm">Kioto</div><div class="city-dt">14–18 Mayo · 4 noches</div><div class="city-tags"><span class="ctag r">Aoi Matsuri 15/5</span><span class="ctag k">Matcha</span><span class="ctag g">Fushimi ★</span></div></div><div class="city-arr">›</div></div></div>
+        <div class="city-card" onclick="openCity('osaka')"><div class="city-inner"><div class="city-kan">大阪</div><div class="city-det"><div class="city-nm">Osaka</div><div class="city-dt">17 Mayo · Excursión día completo</div><div class="city-tags"><span class="ctag r">Dotonbori noche</span><span class="ctag k">Wagyu Box</span></div></div><div class="city-arr">›</div></div></div>
+        <div class="city-card" onclick="openCity('tokio')"><div class="city-inner"><div class="city-kan">東京</div><div class="city-det"><div class="city-nm">Tokio</div><div class="city-dt">19–23 Mayo · 4 noches</div><div class="city-tags"><span class="ctag r">DisneySea 20/5</span><span class="ctag">Akihabara</span><span class="ctag g">Shibuya</span></div></div><div class="city-arr">›</div></div></div>
+      </div>
+      <div class="sec-lbl">Transporte rápido</div>
+      <div class="tr-mini">
+        <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">11/5</div><div class="tr-route">Narita → Takayama</div><div class="tr-price">¥20.500</div><div class="tr-badge tb-ok">Sin reserva</div></div>
+        <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">13/5</div><div class="tr-route">Takayama → Kanazawa (Bus)</div><div class="tr-price">~¥4.500</div><div class="tr-badge tb-now">Reservar</div></div>
+        <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">14/5</div><div class="tr-route">Kanazawa → Kioto (Thunderbird)</div><div class="tr-price">¥7.600</div><div class="tr-badge tb-now">Reservar</div></div>
+        <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">17/5</div><div class="tr-route">Kioto ↔ Osaka (JR Rapid)</div><div class="tr-price">¥580</div><div class="tr-badge tb-ok">Suica</div></div>
+        <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">19/5</div><div class="tr-route">Kioto → Tokio (Nozomi)</div><div class="tr-price">¥14.720</div><div class="tr-badge tb-now">Asiento E</div></div>
+        <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">24/5</div><div class="tr-route">Tokio → Narita (N'EX)</div><div class="tr-price">¥3.250</div><div class="tr-badge tb-now">Día 23</div></div>
+      </div>
+    </div>
+
+    <!-- TRANSPORT -->
+    <div class="screen" id="screen-transport">
+      <div class="tr-full">
+        <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">11</div><div class="tr-hi"><div class="tr-hdate">Dom 11 Mayo · Llegada</div><div class="tr-htitle">Narita → Takayama</div></div><div class="tr-rbadge rb-no">Sin reserva</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Narita Express (N'EX) → Tokio St.</div></div><div class="step"><div class="step-dot"></div><div class="step-txt">Shinkansen Nozomi → Nagoya</div></div><div class="step"><div class="step-dot"></div><div class="step-txt">Ltd. Express Hida → Takayama</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración total</div><div class="tr-dval">~5h 45 min</div></div><div class="tr-drow"><div class="tr-dlbl">Precio por persona</div><div class="tr-dval price">~¥20.500 (~110€)</div></div><div class="tr-drow"><div class="tr-dlbl">Reserva</div><div class="tr-dval">Comprar al llegar en máquinas JR o ventanilla del aeropuerto</div></div></div>
+        <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">13</div><div class="tr-hi"><div class="tr-hdate">Mar 13 Mayo</div><div class="tr-htitle">Takayama → Shirakawa-go → Kanazawa</div></div><div class="tr-rbadge rb-yes">Reservar antes</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Bus Nohi/Kaetsu → Shirakawa-go (~50 min)</div></div><div class="step"><div class="step-dot"></div><div class="step-txt">Bus → Kanazawa (~1h 15 min)</div></div></div><div class="tr-drow"><div class="tr-dlbl">Precio por persona</div><div class="tr-dval price">~¥4.000–5.000</div></div><div class="tr-drow"><div class="tr-dlbl">Reserva</div><div class="tr-dval">Reservar online con antelación: Nohi Bus o Kaetsu Bus</div></div></div>
+        <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">14</div><div class="tr-hi"><div class="tr-hdate">Mié 14 Mayo · tarde</div><div class="tr-htitle">Kanazawa → Kioto</div></div><div class="tr-rbadge rb-yes">2 días antes</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Ltd. Express Thunderbird (directo)</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración</div><div class="tr-dval">~2h 15 min</div></div><div class="tr-drow"><div class="tr-dlbl">Precio por persona</div><div class="tr-dval price">¥7.600 (~41€)</div></div><div class="tr-drow"><div class="tr-dlbl">Reserva</div><div class="tr-dval">2 días antes en cualquier estación JR</div></div></div>
+        <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">17</div><div class="tr-hi"><div class="tr-hdate">Dom 17 Mayo · excursión</div><div class="tr-htitle">Kioto ↔ Osaka</div></div><div class="tr-rbadge rb-no">Sin reserva</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">JR Special Rapid Service (Shinkaisoku)</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración / Precio</div><div class="tr-dval">29 min · <span style="color:var(--kin);font-weight:700">¥580</span> por trayecto</div></div><div class="tr-drow"><div class="tr-dlbl">Pago</div><div class="tr-dval">Tarjeta Suica/Pasmo directamente. Sin reserva.</div></div></div>
+        <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">19</div><div class="tr-hi"><div class="tr-hdate">Mar 19 Mayo</div><div class="tr-htitle">Kioto → Tokio</div></div><div class="tr-rbadge rb-yes">Asiento E (Fuji)</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Shinkansen Nozomi (el más rápido)</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración</div><div class="tr-dval">2h 15 min</div></div><div class="tr-drow"><div class="tr-dlbl">Precio por persona</div><div class="tr-dval price">¥14.720 (~79€)</div></div><div class="tr-drow"><div class="tr-dlbl">Asiento E</div><div class="tr-dval">Lado derecho sentido Tokio. Ver el Monte Fuji al pasar por Shizuoka (~40min desde salida).</div></div></div>
+        <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">20</div><div class="tr-hi"><div class="tr-hdate">Mié 20 Mayo</div><div class="tr-htitle">Tokio → DisneySea</div></div><div class="tr-rbadge rb-no">Sin reserva</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Metro Marunouchi → Tokio St.</div></div><div class="step"><div class="step-dot"></div><div class="step-txt">JR Keiyo Line → Maihama → Bayside Line → DisneySea</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración / Precio</div><div class="tr-dval">~50 min · <span style="color:var(--kin);font-weight:700">~¥500</span></div></div></div>
+        <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">24</div><div class="tr-hi"><div class="tr-hdate">Dom 24 Mayo · vuelo 13:50</div><div class="tr-htitle">Tokio → Narita Airport</div></div><div class="tr-rbadge rb-yes">Reservar día 23</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Narita Express (N'EX) desde Shinjuku o Tokio St.</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración</div><div class="tr-dval">~80 min desde Shinjuku / ~60 min desde Tokio St.</div></div><div class="tr-drow"><div class="tr-dlbl">Precio</div><div class="tr-dval price">¥3.250 (~17€)</div></div><div class="tr-drow"><div class="tr-dlbl">⚠ Salir del hotel antes de las 9:00h</div><div class="tr-dval">Vuelo 13:50 → Llegar al aeropuerto a las 10:50h mínimo</div></div></div>
+      </div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="screen" id="screen-search">
+      <div class="sr-wrap" id="srWrap">
+        <div class="no-res">Escribe en el buscador de arriba<br>para encontrar cualquier lugar 🔍</div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" id="tab-hoy" onclick="showTab('hoy')"><div class="tab-ico">🏠</div><div class="tab-lbl">Inicio</div></div>
+    <div class="tab" id="tab-transport" onclick="showTab('transport')"><div class="tab-ico">🚄</div><div class="tab-lbl">Transporte</div></div>
+    <div class="tab" id="tab-search" onclick="showTab('search')"><div class="tab-ico">🔍</div><div class="tab-lbl">Buscar</div></div>
+  </div>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════
+function stars(n){ return '★'.repeat(n) + '☆'.repeat(3-n); }
+
+// ═══════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════
+// item structure: { n, d, stars(1-3), time, bt, badge, m, src }
+// src: 'milista' | 'jap' (Japonismo) | 'both'
+
+const CITIES = {
+
+// ─────────────────────────────────────────────────────────────
+takayama:{
+  kanji:'高山', name:'Takayama', dates:'11–12 Mayo · Alpes Japoneses',
+  desc:'La pequeña Kioto de los Alpes japoneses. Casas de la era Edo perfectamente conservadas, bodegas de sake reconocibles por sus bolas de cedro, el mejor wagyu de Japón y una atmósfera de otro siglo. Todo a pie desde el centro.',
+  days:[
+    { num:11, date:'Domingo 11 Mayo · Llegada', title:'Narita → Takayama · Noche de llegada',
+      alert:{ t:'⚠ Día de tránsito largo', x:'Aterrizaje 12:00 en Narita. Trayecto ~5h 45min. Llegada a Takayama 19–20h. Solo cenar e instalarse.' },
+      zones:[
+        { z:'🌙 Cena de llegada', items:[
+          { n:'Kotte Ushi', d:'Gunkan de Hidagyu (buey de Hida). Una de las experiencias más icónicas de Takayama: la carne local servida sobre arroz al estilo gunkan. Llegar nada más abrir para asegurar sitio.', stars:3, time:'~45 min', bt:'food', badge:'Mi lista ★', m:'https://maps.google.com/?q=Kotte+Ushi+Takayama', src:'milista' },
+          { n:'Sakaguchiya — Hidagyu Nigiri Sushi', d:'Alternativa si Kotte Ushi está lleno. Nigiri de Hidagyu en ambiente íntimo y tradicional. Igual de recomendable.', stars:3, time:'~45 min', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Sakaguchiya+Takayama+Hidagyu', src:'milista' },
+        ]}
+      ]
+    },
+    { num:12, date:'Lunes 12 Mayo · Día completo', title:'Mercados · Sanmachi Suji · Templos · Hidagyu',
+      tip:{ t:'🗺 Ruta del día', x:'Mercados Asaichi (7–12h) → Sanmachi Suji + bodegas → Takayama Jinya → Casas históricas → Museos del festival → Paseo Higashiyama (tarde) → Puente Nakabashi al atardecer → Cena yakiniku. Todo a pie. ~8–10 km.' },
+      zones:[
+        { z:'🌅 Mañana — Mercados Asaichi (7:00–12:00)', items:[
+          { n:'Miyagawa Asaichi', d:'El mercado más pintoresco, a lo largo de la margen oriental del río Miyagawa entre los puentes Kaiji y Yayoi. Flores, encurtidos, artesanías, sake y productos locales. Llegar antes de las 8h para verlo en todo su esplendor, antes de las masas turísticas.', stars:3, time:'~45 min', bt:'must', badge:'Imprescindible', m:'https://maps.google.com/?q=Miyagawa+Morning+Market+Takayama', src:'jap' },
+          { n:'Jinya-mae Asaichi', d:'El segundo mercado, en la plaza frente al Takayama Jinya. Más pequeño pero igualmente auténtico. Ideal para comprar mitarashi dango calientes o probar el sake local.', stars:2, time:'~20 min', bt:'must', badge:'Muy recomendable', m:'https://maps.google.com/?q=Jinya-mae+Morning+Market+Takayama', src:'jap' },
+        ]},
+        { z:'🏛 Mañana — Casco histórico Sanmachi Suji', items:[
+          { n:'Sanmachi Suji — Las tres calles históricas', d:'El alma de Takayama: las calles Ichinomachi, Ninomachi y Sannomachi perfectamente conservadas desde el período Edo. Casas de madera oscura reconvertidas en museos, galerías, tiendas de artesanía y cafeterías. Ir temprano o al atardecer para el mejor ambiente, con las sombras largas y las luces cálidas.', stars:3, time:'~1h 30min', bt:'must', badge:'Imprescindible', m:'https://maps.google.com/?q=Sanmachi+Suji+Takayama', src:'jap' },
+          { n:'Bodegas Funasaka y Kawashiri — Degustación de sake', d:'Las bodegas de sake más conocidas del casco histórico, identificables por sus bolas de ramas de cedro (sugidama) sobre la entrada. Japonismo ha hecho degustaciones en ambas. Funasaka tiene una plazuela interior con el restaurante Aji no Yohei donde descansar. En muchas se puede comprar sake local.', stars:3, time:'~45 min', bt:'food', badge:'No te lo pierdas', m:'https://maps.google.com/?q=Funasaka+Sake+Brewery+Takayama', src:'jap' },
+          { n:'Takayama Jinya', d:'La única oficina gubernamental del período Edo conservada íntegramente en Japón, controlada directamente por el shogun por los valiosos recursos forestales de la zona. Interior muy bien conservado con explicaciones sobre el gobierno Tokugawa. Cierra entre las 16:30 y 18:00 según temporada.', stars:3, time:'~45 min', bt:'must', badge:'Imprescindible', m:'https://maps.google.com/?q=Takayama+Jinya', src:'jap' },
+          { n:'Casa Kusakabe Mingeikan', d:'Una de las casas señoriales del período Edo más famosas, abierta al público. Sus antiguos residentes eran prestamistas de éxito. La arquitectura con vigas de madera expuesta y espacios multifunción es extraordinaria. Abre 10:00–16:00, cierra martes.', stars:2, time:'~30 min', bt:'must', badge:'Muy recomendable', m:'https://maps.google.com/?q=Kusakabe+Folk+Museum+Takayama', src:'jap' },
+          { n:'Casa Yoshijima-ke', d:'Justo al lado de la Kusakabe. Antigua residencia y destilería de sake. Especialmente interesante si te gusta la arquitectura japonesa. Horario varía por temporada.', stars:2, time:'~25 min', bt:'must', badge:'Muy recomendable', m:'https://maps.google.com/?q=Yoshijima+Heritage+House+Takayama', src:'jap' },
+          { n:'Rickshaw / Jinrikisha por el casco histórico', d:'Una forma diferente de ver Takayama: un paseo en rickshaw tradicional por las callejuelas del casco antiguo. Los conductores suelen dar explicaciones en japonés e inglés básico. Punto de salida junto al puente Nakabashi.', stars:2, time:'~30 min', bt:'must', badge:'Experiencia', m:'https://maps.google.com/?q=Jinrikisha+Rickshaw+Takayama', src:'jap' },
+          { n:'Comprar Sarubobo — El amuleto de Takayama', d:'El sarubobo es la muñeca-amuleto típica de Takayama: figura roja con extremidades puntiagudas y ropa azul o negra. Las abuelas de la zona los hacían para sus nietos. Hoy se vende como amuleto de buena suerte en todos los tamaños. Japonismo lo recomienda como compra imprescindible.', stars:2, time:'~15 min', bt:'shop', badge:'Compras típicas', m:'https://maps.google.com/?q=Sanmachi+Suji+Takayama', src:'jap' },
+        ]},
+        { z:'🍱 Comida — Mi lista', items:[
+          { n:'Hidagyu Hoobamisoyaki — Irori Shirakawago', d:'Buey de Hida a la parrilla sobre hoja de magnolia con pasta de miso (hoba-miso), cocinado sobre hogar tradicional (irori). Una de las grandes experiencias gastronómicas de la región. El hoba-miso es una especialidad local que solo se puede probar aquí.', stars:3, time:'~1h', bt:'food', badge:'Mi lista ★', m:'https://maps.google.com/?q=Irori+Shirakawago+Takayama', src:'milista' },
+          { n:'Hidagyu Takayama Ramen — Ryuryu', d:'El chuka soba (ramen local de Takayama) con wagyu de Hida en lugar de chashu. El ramen de Takayama tiene caldo de soja más suave que en otras ciudades y fideos más finos. Una combinación única de dos especialidades locales.', stars:2, time:'~45 min', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Ryuryu+Ramen+Takayama', src:'milista' },
+          { n:'Hidagyuman Honpo', d:'Los manjū (bollos al vapor) rellenos de carne de Hidagyu son el snack callejero más emblemático de Takayama. Diferentes al takoyaki de pulpo: aquí el relleno es wagyu local. Perfectos para comer paseando por Sanmachi Suji.', stars:2, time:'~10 min', bt:'food', badge:'Mi lista · Snack', m:'https://maps.google.com/?q=Hidagyuman+Honpo+Takayama', src:'milista' },
+          { n:'Restaurante Maruaki', d:'Restaurante específicamente recomendado por Japonismo para comer Hidagyu. Una de sus referencias principales en la ciudad para la carne de buey de Hida.', stars:3, time:'~1h', bt:'food', badge:'Japonismo recomienda', m:'https://maps.google.com/?q=Maruaki+Takayama+Hidagyu', src:'jap' },
+          { n:'Restaurante Ajikura Tengoku', d:'Segunda referencia de Japonismo para Hidagyu en Takayama. Otro restaurante recomendado por nombre propio para comer carne de Hida.', stars:2, time:'~1h', bt:'food', badge:'Japonismo recomienda', m:'https://maps.google.com/?q=Ajikura+Tengoku+Takayama', src:'jap' },
+        ]},
+        { z:'🏯 Tarde — Museos y santuarios', items:[
+          { n:'Yatai Kaikan — Exposición de carrozas del festival', d:'Situado junto al santuario Hachimangu. Exposición permanente de 4 de las 23 carrozas del festival Sannō Matsuri, que datan del siglo XVII. Las carrozas están decoradas con muñecas mecánicas (karakuri ningyō) que se mueven. Entrada: ~¥900. Abre 9–17h.', stars:2, time:'~30 min', bt:'must', badge:'Muy recomendable', m:'https://maps.google.com/?q=Takayama+Yatai+Kaikan', src:'jap' },
+          { n:'Museo Karakuri', d:'Exhibe las muñecas mecánicas (karakuri ningyō) que se colocan en las carrozas del festival y más de 200 máscaras de la danza de leones (shishimai) de todo Japón. Junto al Yatai Kaikan.', stars:2, time:'~25 min', bt:'must', badge:'Recomendable', m:'https://maps.google.com/?q=Karakuri+Museum+Takayama', src:'jap' },
+          { n:'Santuario Sakurayama Hachimangu', d:'El gran santuario de Takayama, organizador del festival de otoño (Hachiman Matsuri, 9–10 octubre). Recinto sereno con árboles centenarios. El torii de madera y el entorno lo hacen muy fotogénico. Junto al Yatai Kaikan.', stars:3, time:'~30 min', bt:'must', badge:'Imprescindible', m:'https://maps.google.com/?q=Sakurayama+Hachimangu+Shrine+Takayama', src:'jap' },
+          { n:'Templo Hida Kokubunji', d:'El templo más antiguo de Takayama, construido en el siglo VIII. Fácilmente visible por la pagoda de tres pisos. En el patio, un árbol ginkgo de más de 1.200 años. Siempre muy tranquilo incluso en temporada alta.', stars:3, time:'~25 min', bt:'must', badge:'Imprescindible', m:'https://maps.google.com/?q=Hida+Kokubunji+Temple+Takayama', src:'jap' },
+        ]},
+        { z:'🚶 Tarde — Paseo Higashiyama (Teramachi)', items:[
+          { n:'Paseo Higashiyama Yūhodō — La ruta de los templos', d:'Un paseo de 3,5 km por la zona este de la ciudad, también llamada Teramachi ("la ciudad de los templos"). Recorre más de una docena de templos y santuarios, las ruinas del antiguo castillo y el parque Shiroyama. Japonismo lo describe como "el Japón más tranquilo, desconocido y rural". Duración caminando sin prisas: ~1h 30min.', stars:3, time:'~1h 30min', bt:'must', badge:'No te lo pierdas', m:'https://maps.google.com/?q=Higashiyama+Walking+Course+Takayama', src:'jap' },
+          { n:'Parque Shiroyama — Ruinas del castillo', d:'El destino final del paseo Higashiyama. Antiguo enclave del castillo de Takayama. Vista elevada sobre la ciudad. Tranquilo y muy poco turístico.', stars:2, time:'~20 min', bt:'must', badge:'Recomendable', m:'https://maps.google.com/?q=Shiroyama+Park+Takayama', src:'jap' },
+        ]},
+        { z:'🌅 Atardecer — Puente Nakabashi', items:[
+          { n:'Puente Nakabashi — 📸 La foto de Takayama', d:'El puente rojizo sobre el río Miyagawa es la imagen icónica de Takayama. Al atardecer con las casas de madera de fondo es mágico. Si lleváis yukata del hotel (muchos ryokan los dan) o alquiláis kimono, este es el momento y el lugar perfecto para fotos de pareja.', stars:3, time:'~20 min', bt:'photo', badge:'Foto imprescindible', m:'https://maps.google.com/?q=Nakabashi+Bridge+Takayama', src:'jap' },
+        ]},
+        { z:'🌙 Cena', items:[
+          { n:'Sengokuya — Yakiniku Hidagyu', d:'Carne de buey de Hida a la parrilla al estilo yakiniku: te asas tú mismo los cortes de wagyu en la mesa. Perfecta para una noche de pareja. Pedir: solomillo, costilla y lengua de Hidagyu.', stars:3, time:'~1h 15min', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Sengokuya+Yakiniku+Takayama', src:'milista' },
+          { n:'Cha No Me — Pastel de queso brûlée', d:'El souvenir gastronómico más buscado de Takayama. Un pastel de queso con capa caramelizada crujiente estilo brûlée. También abierto durante el día si prefieres merendarlo. Para llevar o comer en el sitio.', stars:2, time:'~15 min', bt:'food', badge:'Mi lista · Postre', m:'https://maps.google.com/?q=Cha+No+Me+Takayama', src:'milista' },
+        ]},
+        { z:'🏛 Si sobra tiempo — Museos adicionales', items:[
+          { n:'Hida no Sato — Museo folclórico al aire libre', d:'Más de 30 casas tradicionales de toda la región de Hida trasladadas aquí en 1971. Se puede pasear entre ellas y ver cómo era la vida rural japonesa hace siglos. Algo alejado del centro (bus). Cerca hay baños de pies gratuitos (Hida Hanasato y Sakura).', stars:2, time:'~1h 30min', bt:'must', badge:'Si hay tiempo', m:'https://maps.google.com/?q=Hida+Folk+Village+Takayama', src:'jap' },
+          { n:'Museo Matsuri no Mori', d:'Exposición maravillosa de carrozas del festival, muñecas karakuri y tambores taiko. Algo más alejado del centro que el Yatai Kaikan. Para los que quieran profundizar en la cultura del festival.', stars:2, time:'~45 min', bt:'must', badge:'Opcional', m:'https://maps.google.com/?q=Matsuri+no+Mori+Museum+Takayama', src:'jap' },
+        ]},
+      ]
+    },
+  ]
+},
+
+// ─────────────────────────────────────────────────────────────
+shirakawa:{
+  kanji:'白川郷', name:'Shirakawa-go', dates:'13 Mayo · Escala UNESCO',
+  desc:'Aldea histórica Patrimonio de la Humanidad desde 1995. Sus casas gassho-zukuri ("manos en oración") tienen tejados de paja muy inclinados para soportar las nevadas invernales. Muchas tienen más de 250 años y funcionan como museos o alojamiento.',
+  days:[
+    { num:13, date:'Martes 13 Mayo · Escala en ruta a Kanazawa', title:'Shirakawa-go · 3–4h de visita',
+      tip:{ t:'⏱ Gestión del tiempo', x:'Bus de mañana temprana desde Takayama → llegar antes de las 10h → ~3h de visita → bus a Kanazawa por la tarde → llegada Kanazawa 17–18h.' },
+      zones:[
+        { z:'🌄 Primera parada — Mirador', items:[
+          { n:'Mirador Shiroyama — PRIMERO IR AQUÍ', d:'Desde el antiguo emplazamiento del castillo de Ogimachi se tiene la vista panorámica más famosa de Shirakawa-go: los tejados triangulares de todas las casas con las montañas de fondo. La foto más icónica de la aldea. Se llega andando en ~10 min (subida ligera) o en lanzadera de bus (horarios limitados). Ir ANTES de bajar al centro.', stars:3, time:'~25 min', bt:'photo', badge:'Primera parada · Foto', m:'https://maps.google.com/?q=Shiroyama+Viewpoint+Shirakawago', src:'jap' },
+        ]},
+        { z:'🏘 Casas museo — Elegir al menos una', items:[
+          { n:'Casa Wada-ke', d:'La mayor de las casas gassho-zukuri de Ogimachi, perteneciente a una de las familias más ricas de la aldea. El interior muestra la estructura típica de varios pisos, con el ático donde se criaban gusanos de seda. Japonismo la ha visitado y la recomienda expresamente.', stars:3, time:'~30 min', bt:'must', badge:'Imprescindible', m:'https://maps.google.com/?q=Wada+House+Shirakawa-go', src:'jap' },
+          { n:'Casa Kanda-ke', d:'Una de las mejor conservadas de la aldea. Interior con hogar irori encendido (en temporada fría). Japonismo la recomienda junto a la Wada. Si tienes tiempo, vale la pena ver las dos.', stars:2, time:'~25 min', bt:'must', badge:'Muy recomendable', m:'https://maps.google.com/?q=Kanda+House+Shirakawa-go', src:'jap' },
+          { n:'Casa Nagase-ke', d:'La familia Nagase era médico de los señores Maeda. Funciona como museo con elementos médicos históricos expuestos. Más diferente que las otras dos en cuanto a contenido.', stars:2, time:'~20 min', bt:'must', badge:'Opcional', m:'https://maps.google.com/?q=Nagase+House+Shirakawa-go', src:'jap' },
+        ]},
+        { z:'🛤 Calle principal y templos', items:[
+          { n:'Shirakawago Kaido — Calle principal', d:'La calle principal de la aldea, repleta de casas tradicionales reconvertidas en tiendas de artesanía, restaurantes y puestos callejeros. Aquí se puede probar el gohei mochi (especialidad regional de arroz), croquetas de Hidagyu, mitarashi dango y sake local. También artesanía con seda, producto típico del ático de las casas gassho-zukuri.', stars:3, time:'~30 min', bt:'food', badge:'Imprescindible', m:'https://maps.google.com/?q=Shirakawago+main+street+Ogimachi', src:'jap' },
+          { n:'Templo Myozen-ji', d:'El mayor templo de la aldea, con arquitectura gassho-zukuri en el salón principal y la torre de la campana. Construido a mediados del siglo XVIII, hoy funciona como museo de la aldea. Se pueden ver los aposentos del monje principal.', stars:2, time:'~20 min', bt:'must', badge:'Recomendable', m:'https://maps.google.com/?q=Myozen-ji+Temple+Shirakawa-go', src:'jap' },
+          { n:'Templo Hongaku-ji y cerezo Ohta', d:'Pequeño templo con el cerezo Ohta en su entrada, designado monumento natural de la prefectura. En mayo puede estar en flor. También es localización conocida del anime Higurashi. Merece un desvío rápido.', stars:2, time:'~15 min', bt:'must', badge:'Si hay tiempo', m:'https://maps.google.com/?q=Hongaku-ji+Temple+Shirakawa-go', src:'jap' },
+        ]},
+        { z:'⛩ Santuario y museo del festival', items:[
+          { n:'Santuario Shirakawa Hachimangu', d:'Construido a comienzos del siglo VIII, dedicado a la deidad local. Un cedro sagrado de ~300 años con cuerda shimenawa marca el árbol sagrado del recinto. Suele estar tranquilo porque la mayoría de turistas pasan de largo.', stars:2, time:'~15 min', bt:'must', badge:'Recomendable', m:'https://maps.google.com/?q=Shirakawa+Hachiman+Shrine', src:'jap' },
+          { n:'Museo del Festival Doburoku', d:'Dentro del complejo del santuario. Exposición del mayor festival de la aldea (14–15 octubre). A la salida invitan a un chupito de sake doburoku casero (con granos de arroz sin filtrar), muy diferente al sake embotellado. Comprobar si está abierto antes de ir.', stars:2, time:'~20 min', bt:'food', badge:'Experiencia única', m:'https://maps.google.com/?q=Doburoku+Festival+Museum+Shirakawago', src:'jap' },
+        ]},
+        { z:'📸 Localizaciones fotográficas', items:[
+          { n:'Las tres casas de Shirakawa-go', d:'Tres casas gassho-zukuri frente a arrozales, a ~15 min andando del centro más allá del santuario. A ambos lados hay un restaurante tradicional y una tienda de recuerdos. En mayo el campo es verde brillante. Una de las vistas más fotogénicas de la aldea.', stars:3, time:'~20 min', bt:'photo', badge:'Foto imprescindible', m:'https://maps.google.com/?q=Three+Houses+Shirakawago', src:'jap' },
+          { n:'Espantapájaros frente a casas gassho-zukuri', d:'En una calle paralela a la avenida principal: tres casas gassho-zukuri con arrozal al frente donde a veces los vecinos colocan espantapájaros decorativos. Muy fotogénico. Buscar en el mapa de Japonismo.', stars:2, time:'~10 min', bt:'photo', badge:'Localización foto', m:'https://maps.google.com/?q=Scarecrow+Shirakawago', src:'jap' },
+        ]},
+        { z:'🌉 Puente y museo al aire libre', items:[
+          { n:'Puente colgante de Ogimachi (107m)', d:'Puente de 107 metros que conecta la orilla principal con el museo al aire libre. Cuando el río baja caudaloso es espectacular. En el extremo oriental, el pequeño santuario Ogimachi Akiba. Al otro lado, tienda de recuerdos y snacks.', stars:2, time:'~15 min', bt:'must', badge:'No te lo pierdas', m:'https://maps.google.com/?q=Deai+Bridge+Shirakawa-go', src:'jap' },
+          { n:'Museo al Aire Libre Gassho-zukuri Minkaen', d:'Al otro lado del puente colgante: unas 25 casas gassho-zukuri traídas de distintas zonas de la región. Se puede pasear entre ellas y ver actividades tradicionales como tinte de tejidos o elaboración de soba. La entrada incluye acceso al puente.', stars:2, time:'~45 min', bt:'must', badge:'Muy recomendable', m:'https://maps.google.com/?q=Gasshozukuri+Minkaen+Open+Air+Museum', src:'jap' },
+        ]},
+        { z:'♨ Extra — Si tienes tiempo', items:[
+          { n:'Onsen Shirakawa-no-Yu', d:'Baños termales tradicionales al final de la calle principal, que funcionan también como minshuku (casa rural). El lugar ideal para descansar el cuerpo después de tanto caminar antes del bus a Kanazawa.', stars:2, time:'~45 min', bt:'must', badge:'Opcional', m:'https://maps.google.com/?q=Shirakawa+no+Yu+Onsen', src:'jap' },
+        ]},
+        { z:'🍱 Comer — Mi lista', items:[
+          { n:'Irori Shirakawago — Hooba-miso Hidagyu', d:'Si no lo hiciste en Takayama: Hidagyu sobre hoja de magnolia con pasta de miso, cocinado sobre hogar tradicional (irori). Experiencia gastronómica única de la región que vale la pena hacer en alguno de los dos destinos.', stars:3, time:'~1h', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Irori+Shirakawago+restaurant', src:'milista' },
+        ]},
+      ]
+    },
+  ]
+},
+
+// ─────────────────────────────────────────────────────────────
+kanazawa:{
+  kanji:'金沢', name:'Kanazawa', dates:'13 noche – 14 Mayo',
+  desc:'La Kioto del Mar de Japón, sin sus masas turísticas. El clan Maeda gobernó aquí durante el período Edo acumulando una riqueza que dejó jardines espectaculares, barrios de geishas intactos, samuráis, el 99% del pan de oro de Japón y una gastronomía kaiseki de alto nivel.',
+  days:[
+    { num:14, date:'Miércoles 14 Mayo · Mañana intensa', title:'Kenroku-en · Geishas · Pan de oro → Thunderbird a Kioto',
+      tip:{ t:'🗺 Ruta del día', x:'Estación (foto) → Kenroku-en + Gyokusen\'inmaru → Castillo + Oyama → Omicho (comida) → Higashi Chaya + Kazuemachi → Sakuda Gold Leaf → Nagamachi → Tren Thunderbird a Kioto tarde. Bus circular ¥200/trayecto.' },
+      zones:[
+        { z:'📸 Primera parada — Estación de Kanazawa', items:[
+          { n:'Estación de Kanazawa — Puerta Tsuzumi y cúpula Motenashi', d:'Una de las estaciones más fotografiadas de Japón. La puerta Tsuzumi tiene forma de tambor japonés (13,5m de alto, 24m de ancho). La cúpula Motenashi es la estructura acristalada que la envuelve. También hay una fuente-reloj que dibuja la hora en kanji con chorros de agua. Proyecto completado en 2005 con 17.000 millones de yenes de inversión.', stars:3, time:'~20 min', bt:'photo', badge:'Foto imprescindible', m:'https://maps.google.com/?q=Kanazawa+Station+Tsuzumi+Gate', src:'jap' },
+        ]},
+        { z:'🌿 Jardines y castillo', items:[
+          { n:'Jardín Kenroku-en ★ — Uno de los tres más bellos de Japón', d:'El gran jardín del clan Maeda, uno de los "Nihon Sanmei" (tres jardines más bellos de Japón). Más de 11.000 árboles, estanques, cascadas y farolillos de piedra. En mayo todo está verde y espléndido. Llegar nada más abrir (7h) para disfrutarlo sin masas. El farolillo Kotoji (con forma de arpa de dos patas) es la imagen icónica del jardín.', stars:3, time:'~1h 30min', bt:'must', badge:'Imprescindible ⭐', m:'https://maps.google.com/?q=Kenrokuen+Garden+Kanazawa', src:'jap' },
+          { n:'Jardines Gyokusen\'inmaru y casa de té', d:'Jardines a los pies del parque del castillo, destruidos en el período Meiji y recuperados en 2008. Un ejemplo precioso de jardín paisajístico del período Edo. En la casa de té interior se puede tomar matcha y un dulce tradicional japonés. Muy poco frecuentado por turistas.', stars:2, time:'~30 min', bt:'must', badge:'No te lo pierdas', m:'https://maps.google.com/?q=Gyokusennin-maru+Garden+Kanazawa', src:'jap' },
+          { n:'Parque del Castillo de Kanazawa', d:'La famosa puerta Ishikawa marca la entrada al parque donde estaba el castillo del clan Maeda. Se han reconstruido varias partes. Al estar junto a Kenroku-en, merece la pena dar una vuelta y descansar.', stars:2, time:'~30 min', bt:'must', badge:'Muy recomendable', m:'https://maps.google.com/?q=Kanazawa+Castle+Park', src:'jap' },
+          { n:'Santuario Oyama', d:'Construido en 1599 y dedicado a Maeda Toshiie, primer señor del clan Maeda. Justo enfrente de los jardines Gyokusen\'inmaru. Un desvío rápido que merece la pena si estás en la zona.', stars:2, time:'~15 min', bt:'must', badge:'Si hay tiempo', m:'https://maps.google.com/?q=Oyama+Shrine+Kanazawa', src:'jap' },
+          { n:'Museo de Arte Contemporáneo del Siglo 21', d:'Uno de los museos más famosos de Japón. El edificio circular de cristal, obra de los arquitectos Sejima Kazujo y Nishizawa Ryue (estudio SANAA), inaugurado en 2004, es en sí mismo una obra de arte. Muy cerca del Kenroku-en.', stars:3, time:'~1h', bt:'must', badge:'Muy recomendable', m:'https://maps.google.com/?q=21st+Century+Museum+Contemporary+Art+Kanazawa', src:'jap' },
+        ]},
+        { z:'🍱 Comida — Mercado Omicho', items:[
+          { n:'Mercado Omicho — 180 puestos de productos del Mar de Japón', d:'El mercado más grande de Kanazawa, activo desde el siglo XVIII. 180 puestos con ostras, sushi, frutas, pescado, carne, setas... Hay pequeños restaurantes de sushi dentro del mercado, más fresco imposible. Los locales compran aquí para su despensa. Japonismo lo recomienda expresamente para comer.', stars:3, time:'~45 min', bt:'food', badge:'Comer aquí', m:'https://maps.google.com/?q=Omicho+Market+Kanazawa', src:'jap' },
+          { n:'Restaurante Jugatsuya — Kaiseki en el barrio de geishas', d:'Restaurante tradicional de cocina kaiseki de la región de Kaga en pleno barrio de geishas Higashi Chaya. Japonismo lo menciona por nombre propio como una experiencia muy especial, tanto por la belleza del lugar como por la comida. Reservar con antelación.', stars:3, time:'~1h 30min', bt:'food', badge:'Japonismo recomienda', m:'https://maps.google.com/?q=Jugatsuya+Kanazawa+restaurant', src:'jap' },
+          { n:'Curry de Kanazawa', d:'Kanazawa es la cuna de un estilo de curry japonés muy particular, diferente al del resto del país. Hay varios restaurantes especializados en la ciudad. Una experiencia gastronómica local que no es tan conocida por los turistas.', stars:2, time:'~30 min', bt:'food', badge:'Especialidad local', m:'https://maps.google.com/?q=Kanazawa+curry+restaurant', src:'jap' },
+        ]},
+        { z:'🏮 Barrios históricos', items:[
+          { n:'Higashi Chaya — Barrio de geishas (el más grande)', d:'El barrio de geishas más grande y mejor conservado de Kanazawa. Calles adoquinadas con casas de madera y celosías de bambú (kikomachi). Varios chaya convertidos en museos, cafeterías o tiendas de pan de oro. Aquí se compra artesanía lacada (shunkei) y objetos decorados con pan de oro. El helado de pan de oro es obligatorio.', stars:3, time:'~45 min', bt:'must', badge:'Imprescindible', m:'https://maps.google.com/?q=Higashi+Chaya+District+Kanazawa', src:'jap' },
+          { n:'Kazuemachi — El barrio de geishas menos masificado', d:'Segundo barrio de geishas de Kanazawa, mucho más tranquilo que Higashi Chaya. Junto al río Asanogawa. Más auténtico y con menos turistas. Japonismo lo menciona junto a Higashi Chaya como visita del barrio de geishas.', stars:2, time:'~20 min', bt:'must', badge:'Recomendable', m:'https://maps.google.com/?q=Kazuemachi+Geisha+District+Kanazawa', src:'jap' },
+          { n:'Sakuda Gold Leaf — Taller y tienda de pan de oro', d:'Kanazawa produce el 99% del pan de oro de Japón, una tradición de siglos. En Sakuda se puede ver artesanos trabajando con láminas de pan de oro y participar en talleres. Tienda con recuerdos únicos: cosméticos, snacks, artesanía. El helado cubierto de pan de oro es el souvenir gastronómico más buscado.', stars:3, time:'~30 min', bt:'shop', badge:'No te lo pierdas', m:'https://maps.google.com/?q=Sakuda+Gold+Silver+Leaf+Kanazawa', src:'jap' },
+          { n:'Kaga Yuzen Kimono Center', d:'Centro donde ver la técnica de teñido Kaga Yuzen (pintura manual de kimonos) y participar en un taller. Muy cerca del Kenroku-en. La técnica Kaga Yuzen es una de las artesanías más representativas de Kanazawa.', stars:2, time:'~45 min', bt:'shop', badge:'Experiencia artesanal', m:'https://maps.google.com/?q=Kaga+Yuzen+Kimono+Center+Kanazawa', src:'jap' },
+        ]},
+        { z:'⚔ Barrio de samuráis y templos', items:[
+          { n:'Nagamachi — Barrio de samuráis', d:'El barrio donde vivían los guerreros del clan Maeda, con callejuelas empedradas, muros de adobe y canales de agua. Varias casas antiguas abiertas al público muestran cómo era la vida samurái. La villa Nomura es la más visitada.', stars:3, time:'~30 min', bt:'must', badge:'Imprescindible', m:'https://maps.google.com/?q=Nagamachi+Samurai+District+Kanazawa', src:'jap' },
+          { n:'Templo Myoryuji — El Templo Ninja', d:'El famoso "templo ninja" de Kanazawa, lleno de puertas secretas, pasadizos ocultos, escaleras que llevan a ningún lado y trampas. La visita es guiada y hay que reservar con antelación. Una experiencia muy diferente a cualquier otro templo.', stars:3, time:'~45 min', bt:'must', badge:'Muy especial', m:'https://maps.google.com/?q=Myoryuji+Ninja+Temple+Kanazawa', src:'jap' },
+          { n:'Katamachi — Chuo Mishokugai (callejones retro)', d:'El distrito de entretenimiento de Kanazawa. Callejones estrechos de ambiente retro con bares izakaya muy pequeños y auténticos (pocos asientos alrededor de la barra). Llenos de personalidad donde es fácil entablar conversación con locales. El lugar más auténtico para cenar en Kanazawa.', stars:2, time:'~1h 30min', bt:'food', badge:'Para la noche', m:'https://maps.google.com/?q=Katamachi+Kanazawa', src:'jap' },
+        ]},
+      ]
+    },
+  ]
+},
+
+// ─────────────────────────────────────────────────────────────
+kioto:{
+  kanji:'京都', name:'Kioto', dates:'14 noche – 18 Mayo · 4 noches',
+  desc:'La antigua capital imperial, con más de 1.600 templos y santuarios. Aquí conviven los torii rojos de Fushimi Inari, el bosque de bambú de Arashiyama, los barrios de geishas de Gion, el pabellón dorado, el mejor matcha del mundo y el festival imperial más antiguo de Japón.',
+  days:[
+    { num:15, date:'Viernes 15 Mayo · 🎌 Evento especial', title:'AOI MATSURI · Castillo Nijo · Matcha · Cena',
+      alert:{ t:'🎌 AOI MATSURI — Festival más antiguo de Japón', x:'Procesión de 500 personas en trajes del período Heian (794–1185 d.C.). Sale del Palacio Imperial a las 10:30h. Llegar ANTES de las 10h. Recorre 8 km hasta los santuarios Shimogamo y Kamigamo. Completamente GRATUITO desde la calle. Una vez en la vida.' },
+      zones:[
+        { z:'🎌 Mañana — Festival Aoi Matsuri', items:[
+          { n:'Palacio Imperial de Kioto — Salida de la procesión (10:30h)', d:'500 personas con trajes del período Heian, bueyes ornamentados y damas de la corte con junihitoe (12 capas de kimono). Llegar antes de las 10h para conseguir sitio en la valla. La preparación previa a la salida también vale la pena verla.', stars:3, time:'~1h 30min', bt:'must', badge:'Evento único', m:'https://maps.google.com/?q=Kyoto+Imperial+Palace', src:'jap' },
+          { n:'Santuario Shimogamo Jinja — Llegada de la procesión', d:'Uno de los santuarios más antiguos de Kioto (siglo VI a.C.) dentro del bosque de Tadasu no Mori. La procesión llega aquí para ceremonias a media mañana. Seguir la procesión a pie o en bus desde el Palacio Imperial.', stars:3, time:'~45 min', bt:'must', badge:'No te lo pierdas', m:'https://maps.google.com/?q=Shimogamo+Shrine+Kyoto', src:'jap' },
+        ]},
+        { z:'🏯 Tarde — Centro de Kioto', items:[
+          { n:'Castillo Nijo-jo', d:'El palacio fortaleza del shogun Tokugawa en Kioto, construido en 1603. Famoso por sus "suelos ruiseñores" (uguisubari) que crujen al pisarlos para alertar de intrusos. Los jardines interiores en mayo tienen wisteria en flor. Ver el interior y recorrer sus jardines.', stars:3, time:'~1h 15min', bt:'must', badge:'Imprescindible', m:'https://maps.google.com/?q=Nijo+Castle+Kyoto', src:'jap' },
+          { n:'Mercado Nishiki y santuario Nishiki Tenmangu', d:'"La cocina de Kioto": 400 metros de calle cubierta con más de 100 puestos de encurtidos, tofu fresco, wagashi, dashimaki tamago y comida callejera variada. Perfecto para picar mientras se compra. Dentro hay un pequeño santuario (Nishiki Tenmangu) muy fotogénico.', stars:3, time:'~45 min', bt:'food', badge:'No te lo pierdas', m:'https://maps.google.com/?q=Nishiki+Market+Kyoto', src:'jap' },
+          { n:'Calles Shijo y Kawaramachi — Zona comercial', d:'Las dos calles comerciales más activas de Kioto, repletas de tiendas de recuerdos, ropa y comida. Ideales para comprar omiyage (regalos típicos) como mochi de matcha o yatsuhashi (galletas de canela). Perfectas para tarde de compras.', stars:2, time:'~30 min', bt:'shop', badge:'Compras', m:'https://maps.google.com/?q=Shijo+Street+Kyoto', src:'jap' },
+        ]},
+        { z:'🍵 Matcha — Mi lista completa', items:[
+          { n:'Arabica Coffee (% Arabica)', d:'La cafetería de specialty coffee más instagrameada de Kioto. El matcha latte con las vistas de Arashiyama al fondo es una imagen icónica. Varias ubicaciones en Kioto; la de Arashiyama es la más fotogénica, la del centro más accesible.', stars:3, time:'~30 min', bt:'matcha', badge:'Mi lista · Matcha', m:'https://maps.google.com/?q=%25+Arabica+Kyoto', src:'milista' },
+          { n:'Totaro — Matcha en Higashiyama', d:'Uno de los mejores establecimientos de matcha de Kioto, con vistas al jardín. Situado en la zona de Higashiyama. Ambiente tranquilo y cuidado. Para la pausa de la tarde después de Kiyomizudera.', stars:3, time:'~30 min', bt:'matcha', badge:'Mi lista · Matcha', m:'https://maps.google.com/?q=Totaro+Matcha+Kyoto', src:'milista' },
+          { n:'Hatoya', d:'Establecimiento tradicional de matcha en Kioto con ambiente sereno. De la lista personal.', stars:2, time:'~20 min', bt:'matcha', badge:'Mi lista · Matcha', m:'https://maps.google.com/?q=Hatoya+Kyoto+matcha', src:'milista' },
+          { n:'Wasachi', d:'Matcha de especialidad con enfoque en calidad del té. Ambiente tranquilo en Kioto.', stars:2, time:'~20 min', bt:'matcha', badge:'Mi lista · Matcha', m:'https://maps.google.com/?q=Wasachi+Kyoto', src:'milista' },
+          { n:'Le Labo Machiya', d:'Café en machiya (casa de madera tradicional). Una experiencia doble: beber matcha dentro de un edificio histórico restaurado.', stars:2, time:'~25 min', bt:'matcha', badge:'Mi lista · Matcha', m:'https://maps.google.com/?q=Le+Labo+Machiya+Kyoto', src:'milista' },
+          { n:'Walden Woods Kyoto', d:'Café de especialidad con enfoque en matcha. Espacio minimalista muy fotografiado en Kioto centro. Ambiente cuidado y moderno.', stars:2, time:'~20 min', bt:'matcha', badge:'Mi lista · Matcha', m:'https://maps.google.com/?q=Walden+Woods+Kyoto', src:'milista' },
+          { n:'Onn Kyoto', d:'Cafetería con matcha artesanal en entorno íntimo. De la lista personal.', stars:2, time:'~20 min', bt:'matcha', badge:'Mi lista · Matcha', m:'https://maps.google.com/?q=Onn+Kyoto+cafe', src:'milista' },
+          { n:'Cafe Kawataro', d:'Uno de los cafés de matcha más populares entre los viajeros en Kioto. De la lista personal.', stars:2, time:'~20 min', bt:'matcha', badge:'Mi lista · Matcha', m:'https://maps.google.com/?q=Cafe+Kawataro+Kyoto', src:'milista' },
+          { n:'Hario Café', d:'Flagship del fabricante japonés de utensilios de café y té. Matcha y café de especialidad en un espacio de diseño. En Kioto.', stars:2, time:'~20 min', bt:'matcha', badge:'Mi lista · Matcha', m:'https://maps.google.com/?q=Hario+Cafe+Kyoto', src:'milista' },
+        ]},
+        { z:'🌙 Cena — Mi lista', items:[
+          { n:'Hikiniku to Come — Albóndigas wagyu a la parrilla', d:'Menú único: albóndigas de wagyu a la parrilla servidas con arroz, cebolla cruda rallada y salsa. Original de Tokio con sucursal en Kioto. Una experiencia gastronómica muy específica y deliciosa. Puede haber cola.', stars:3, time:'~1h', bt:'food', badge:'Mi lista ★', m:'https://maps.google.com/?q=Hikiniku+to+Come+Kyoto', src:'milista' },
+          { n:'Itoh Dining by Nobu', d:'Cocina japonesa contemporánea de nivel alto en Kioto, del chef Nobu Matsuhisa. Fusión japonesa-internacional de primer nivel. Reservar con mucha antelación.', stars:3, time:'~2h', bt:'food', badge:'Mi lista · Premium', m:'https://maps.google.com/?q=Itoh+Dining+Nobu+Kyoto', src:'milista' },
+          { n:'Maruman Kyoto', d:'Restaurante de cocina japonesa tradicional en Kioto. De la lista personal.', stars:2, time:'~1h', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Maruman+Kyoto', src:'milista' },
+          { n:'Kaiseki ryōri en Hanamikoji (Gion)', d:'Japonismo recomienda probar la cocina kaiseki en alguno de los restaurantes de la calle Hanamikoji del barrio de Gion. La experiencia completa de la cocina de alta gama de Kioto.', stars:3, time:'~2h', bt:'food', badge:'Japonismo recomienda', m:'https://maps.google.com/?q=Hanamikoji+Kyoto+kaiseki', src:'jap' },
+        ]},
+      ]
+    },
+    { num:16, date:'Sábado 16 Mayo', title:'Fushimi Inari madrugada + Higashiyama completo + Gion',
+      tip:{ t:'🗺 Ruta del día', x:'Fushimi Inari (6:00–9:00h) → Tofukuji → Kiyomizudera → Sannenzaka/Ninenzaka → Sanjusangendo → Gion (Hanamikoji, canal Shirakawa) → Miyagawacho → Pontocho → Cena.' },
+      zones:[
+        { z:'🌅 Madrugada (6:00–9:00h) — Sur de Kioto', items:[
+          { n:'Fushimi Inari Taisha ★ — Los 10.000 torii', d:'El santuario de los zorros y los miles de torii naranjas encadenados por la montaña. Abre las 24h. Ir ANTES de las 7h para fotos sin turistas. El Yotsutsuji (cruce de 4 caminos, ~30 min de subida) ofrece la mejor vista sin llegar a la cumbre. La cumbre completa son ~2h ida y vuelta. En sábado se llena muy rápido.', stars:3, time:'~1h 30min', bt:'must', badge:'Imprescindible ⭐', m:'https://maps.google.com/?q=Fushimi+Inari+Taisha+Kyoto', src:'jap' },
+        ]},
+        { z:'🏛 Mañana — Higashiyama central', items:[
+          { n:'Templo Kiyomizudera ★', d:'El gran templo de Kioto sobre la ladera del monte Otowa. La plataforma de madera (sin clavos ni argamasa) con vistas panorámicas es una de las imágenes más icónicas de Japón. Debajo, las tres cascadas Otowa dan longevidad, fortuna y amor. En mayo el paisaje verde es espectacular.', stars:3, time:'~45 min', bt:'must', badge:'Imprescindible ⭐', m:'https://maps.google.com/?q=Kiyomizudera+Temple+Kyoto', src:'jap' },
+          { n:'Sannenzaka y Ninenzaka — Calles históricas', d:'Las dos cuestas adoquinadas más fotogénicas de Kioto, con casas del período Edo convertidas en tiendas, cafeterías y el famoso Starbucks en un machiya. Para probar: yatsuhashi (galletas de canela típicas de Kioto) y matcha en los establecimientos tradicionales.', stars:3, time:'~45 min', bt:'photo', badge:'Fotos / Compras', m:'https://maps.google.com/?q=Sannenzaka+Ninenzaka+Kyoto', src:'jap' },
+          { n:'Templo Sanjusangendo', d:'Templo budista conocido por sus 1.000 estatuas del Kannon de los mil brazos dispuestas en 10 filas y 50 columnas. Una experiencia visual impresionante y única en Japón. Hay que descalzarse (llevar calcetines gruesos en días fríos).', stars:3, time:'~30 min', bt:'must', badge:'No te lo pierdas', m:'https://maps.google.com/?q=Sanjusangendo+Temple+Kyoto', src:'jap' },
+          { n:'Templo Chion-in', d:'Junto al parque Maruyama. Japonismo lo describe como "un lugar de belleza excepcional". La puerta principal (sanmon) es una de las más grandes de Japón. Vale la pena al pasar por la zona.', stars:2, time:'~20 min', bt:'must', badge:'Muy recomendable', m:'https://maps.google.com/?q=Chion-in+Temple+Kyoto', src:'jap' },
+          { n:'Parque Maruyama', d:'El parque público más famoso de Kioto, junto al santuario Yasaka. Para sentarse, tomar algo y relajarse. Japonismo lo recomienda para hacer picnic o simplemente descansar del turismo.', stars:2, time:'~20 min', bt:'must', badge:'Descanso', m:'https://maps.google.com/?q=Maruyama+Park+Kyoto', src:'jap' },
+        ]},
+        { z:'🏮 Tarde — Gion y barrios de geishas', items:[
+          { n:'Barrio de Gion — Hanamikoji y canal Shirakawa', d:'El barrio de geishas más famoso de Japón. Pasear Hanamikoji al atardecer para mayor probabilidad de ver maikos. El canal Shirakawa cercano tiene un ambiente de época donde "parece que se haya detenido el tiempo" (Japonismo). El santuario Yasaka cierra el eje con su gran torii iluminado.', stars:3, time:'~1h', bt:'must', badge:'Imprescindible', m:'https://maps.google.com/?q=Gion+Hanamikoji+Kyoto', src:'jap' },
+          { n:'Miyagawacho — El barrio de geishas menos conocido', d:'Distrito de geishas "espectacular y mucho menos bullicioso que Gion" (Japonismo). Junto al río Kamo, paralelo a Pontocho. Menos turistas, más auténtico. Imprescindible si se quiere ver el ambiente de geishas sin masas.', stars:3, time:'~30 min', bt:'must', badge:'No te lo pierdas', m:'https://maps.google.com/?q=Miyagawacho+Kyoto', src:'jap' },
+          { n:'Teatro Gion Corner', d:'Espectáculos de artes tradicionales japonesas (tea ceremony, ikebana, bugaku, koto, kyogen, maiko dance). Las maikos que actúan son maikos de verdad, no actrices. Una forma de ver artes tradicionales en formato accesible.', stars:2, time:'~1h', bt:'must', badge:'Experiencia', m:'https://maps.google.com/?q=Gion+Corner+Kyoto', src:'jap' },
+          { n:'Pontocho — Cena junto al río Kamo', d:'La callejuela más famosa de Kioto, paralela al río Kamo. La zona de restaurantes más romántica. En mayo las terrazas sobre el río (kawayuka) están abiertas. Mi lista: Gion Sushi Shokichi, Menya Inoichi. O simplemente pasear y elegir.', stars:3, time:'~1h 30min', bt:'food', badge:'Cena romántica', m:'https://maps.google.com/?q=Pontocho+Alley+Kyoto', src:'both' },
+        ]},
+        { z:'🛍 Compras — Mi lista Kioto', items:[
+          { n:'Tsujikura — Sombrillas y paraguas tradicionales', d:'Tienda histórica de washi-gasa (sombrillas de papel de arroz pintadas a mano). Las sombrillas son el souvenir más fotogénico de Kioto, perfectas para fotos en Gion. Únicas y auténticas.', stars:3, time:'~20 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=Tsujikura+Kyoto', src:'milista' },
+          { n:'Yagi', d:'Tienda japonesa de ropa y accesorios en Kioto. De la lista personal.', stars:2, time:'~20 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=Yagi+Kyoto', src:'milista' },
+          { n:'Rikka Knot', d:'Tienda de ropa y accesorios japoneses de diseño. De la lista personal.', stars:2, time:'~20 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=Rikka+Knot+Kyoto', src:'milista' },
+          { n:'Wakabaya', d:'Tienda de ropa japonesa en Kioto. De la lista personal.', stars:2, time:'~15 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=Wakabaya+Kyoto', src:'milista' },
+          { n:'Momotaro Jeans', d:'La marca japonesa de denim selvedge premium fabricado en Okayama. Proceso artesanal. Los jeans son de coleccionista y muy difíciles de encontrar fuera de Japón.', stars:3, time:'~30 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=Momotaro+Jeans+Kyoto', src:'milista' },
+          { n:'Issey Miyake', d:'El diseñador japonés más icónico. Piezas únicas de moda de alto diseño. Tienda en Kioto.', stars:2, time:'~20 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=Issey+Miyake+Kyoto', src:'milista' },
+          { n:'Public Tokyo', d:'Marca de ropa japonesa contemporánea. De la lista personal.', stars:2, time:'~20 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=Public+Tokyo+Kyoto', src:'milista' },
+          { n:'Pro Antiques Store', d:'Tienda de antigüedades y objetos vintage japoneses en Kioto. Para encontrar piezas únicas.', stars:2, time:'~30 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=Pro+Antiques+Store+Kyoto', src:'milista' },
+          { n:'Santuario Kitano Tenmangu — Mercadillo día 25', d:'Si la visita coincide con el día 25 del mes: mercadillo donde vender kimono y obi de segunda mano, cerámica japonesa y antigüedades. Una experiencia única que recomienda Japonismo.', stars:2, time:'~1h', bt:'shop', badge:'Japonismo recomienda (día 25)', m:'https://maps.google.com/?q=Kitano+Tenmangu+Shrine+Kyoto', src:'jap' },
+        ]},
+        { z:'🌙 Cena Día 16 — Mi lista', items:[
+          { n:'Gion Sushi Shokichi', d:'Sushi en el barrio de Gion. Ambiente íntimo y cocina de calidad. Perfecto después del paseo por Gion al atardecer.', stars:3, time:'~1h', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Gion+Sushi+Shokichi+Kyoto', src:'milista' },
+          { n:'Menya Inoichi', d:'Ramen premium en Kioto. Caldo de altísima calidad elaborado con mucha dedicación. Uno de los referentes de ramen de la ciudad.', stars:3, time:'~45 min', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Menya+Inoichi+Kyoto', src:'milista' },
+        ]},
+      ]
+    },
+    { num:18, date:'Lunes 18 Mayo', title:'Arashiyama · Kinkakuji · Ryoanji · Compras · Última cena',
+      tip:{ t:'🗺 Ruta del día', x:'Arashiyama (antes de las 8h) → % Arabica → Tenryuji → Saga Toriimoto (opcional) → Odai Sushi (comida) → Kinkakuji → Daitokuji (opcional) → Ryoanji → Nishiki Market → Compras → Última cena Kioto.' },
+      zones:[
+        { z:'🌿 Mañana — Arashiyama (llegar antes de las 8h)', items:[
+          { n:'Bosque de Bambú de Arashiyama ★', d:'Las cañas gigantes que filtran la luz de forma sobrenatural. La foto más icónica de Japón. Ir a las 7h para estar solo. El sendero principal dura ~15 min pero merece cada segundo. El sonido del bambú al viento está protegido como "sonido del patrimonio de Japón".', stars:3, time:'~20 min', bt:'must', badge:'Imprescindible ⭐', m:'https://maps.google.com/?q=Arashiyama+Bamboo+Grove+Kyoto', src:'jap' },
+          { n:'% Arabica Arashiyama — Desayuno con vistas', d:'Specialty coffee con vistas al río Oi y las montañas de Arashiyama. El mejor café con leche de matcha de Kioto. Perfecto para el desayuno tras el bambú, cuando el café abre.', stars:3, time:'~30 min', bt:'matcha', badge:'Mi lista · Matcha', m:'https://maps.google.com/?q=Arabica+Coffee+Arashiyama+Kyoto', src:'milista' },
+          { n:'Templo Tenryuji + Jardín Zen', d:'El gran templo de Arashiyama con jardín zen Patrimonio Mundial. El estanque Sogenchi con las montañas de fondo es una de las vistas más fotografiadas de Kioto. Justo al lado del bosque de bambú. Vale la pena pagar la entrada.', stars:3, time:'~45 min', bt:'must', badge:'Imprescindible', m:'https://maps.google.com/?q=Tenryuji+Temple+Arashiyama', src:'jap' },
+          { n:'Puente Togetsukyō y ribera del río', d:'El puente más famoso de Arashiyama con las montañas de fondo. La foto clásica de la zona. En mayo el paisaje es verde intenso. Pasear por la ribera es muy agradable.', stars:3, time:'~20 min', bt:'photo', badge:'Foto imprescindible', m:'https://maps.google.com/?q=Togetsukyo+Bridge+Arashiyama', src:'jap' },
+          { n:'Saga Toriimoto — El norte de Arashiyama', d:'Distrito de conservación histórica al norte de Arashiyama. Mucho más tranquilo que la zona central. Casas tradicionales conservadas y templos espectaculares: Adashino Nenbutsu-ji y Otagi Nenbutsu-ji (con sus 1.200 figuras de piedra cómicas). Japonismo lo recomienda para los que quieran alejarse de las masas.', stars:2, time:'~45 min', bt:'must', badge:'Si hay tiempo', m:'https://maps.google.com/?q=Saga+Toriimoto+Kyoto', src:'jap' },
+          { n:'Odai Sushi Arashiyama — Comida', d:'Sushi en Arashiyama de la lista personal. Comer aquí antes de desplazarse al Kinkakuji.', stars:2, time:'~45 min', bt:'food', badge:'Mi lista · Comida', m:'https://maps.google.com/?q=Odai+Sushi+Arashiyama+Kyoto', src:'milista' },
+        ]},
+        { z:'🏯 Mediodía — Templos del noroeste', items:[
+          { n:'Kinkakuji ★ — El Pabellón Dorado', d:'El templo zen cubierto de pan de oro reflejado en el estanque Kyoko-chi. La imagen más conocida de Japón. Aunque esté lleno de gente, la vista es absolutamente sobrecogedora. En mayo el jardín verde intenso contrasta perfectamente con el dorado.', stars:3, time:'~45 min', bt:'must', badge:'Imprescindible ⭐', m:'https://maps.google.com/?q=Kinkakuji+Temple+Kyoto', src:'jap' },
+          { n:'Templo Daitokuji — Jardines zen secretos', d:'Complejo de subtemples con algunos de los mejores jardines zen de Kioto, muchos poco conocidos. Japonismo recomienda el jardín de Daisen-in y el de Zuiho-in. A 10 min del Kinkakuji.', stars:2, time:'~45 min', bt:'must', badge:'Si hay tiempo', m:'https://maps.google.com/?q=Daitokuji+Temple+Kyoto', src:'jap' },
+          { n:'Ryoanji — El jardín de piedras más famoso', d:'El jardín karesansui (grava y 15 piedras) más célebre del mundo. Nunca se pueden ver todas las piedras a la vez desde ningún punto del corredor. Místico y minimalista. A 10 min andando del Kinkakuji.', stars:3, time:'~30 min', bt:'must', badge:'Imprescindible', m:'https://maps.google.com/?q=Ryoanji+Temple+Kyoto', src:'jap' },
+          { n:'Templo Ninna-ji', d:'Templo imperial con pagoda de cinco pisos y jardines propios. Japonismo lo menciona como visita del noroeste de Kioto. Junto al Ryoanji.', stars:2, time:'~30 min', bt:'must', badge:'Si hay tiempo', m:'https://maps.google.com/?q=Ninnaji+Temple+Kyoto', src:'jap' },
+        ]},
+        { z:'🛍 Tarde — Compras Kioto', items:[
+          { n:'Kapital Jeans', d:'Marca japonesa de ropa artesanal inspirada en el denim, folklore americano y artesanía japonesa. Muy difícil de encontrar fuera de Japón. Colecciones únicas y piezas de coleccionista.', stars:3, time:'~30 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=Kapital+Kyoto', src:'milista' },
+          { n:'Hamazushi — Sushi conveyor belt', d:'Cadena de sushi de calidad razonable y precio económico. Buena opción si se quiere una comida rápida o si queda tiempo entre tiendas.', stars:1, time:'~30 min', bt:'food', badge:'Mi lista · Casual', m:'https://maps.google.com/?q=Hamazushi+Kyoto', src:'milista' },
+        ]},
+        { z:'🌙 Última cena en Kioto', items:[
+          { n:'Takusando — Sándwich de pollo', d:'Katsu sando de pollo: pollo frito crujiente en pan de molde esponjoso con salsa tonkatsu. Una de las comidas más sabrosas y fotogénicas de Kioto.', stars:2, time:'~30 min', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Takusando+Kyoto', src:'milista' },
+          { n:'Saryo Tesshin', d:'Cena kaiseki en ambiente tradicional elegante. Para la última noche en Kioto si se quiere una experiencia de alto nivel.', stars:3, time:'~2h', bt:'food', badge:'Mi lista · Kaiseki', m:'https://maps.google.com/?q=Saryo+Tesshin+Kyoto', src:'milista' },
+          { n:'Yamaoto Menzou', d:'Ramen artesanal de calidad en Kioto. Alternativa más informal y económica para la última noche.', stars:2, time:'~45 min', bt:'food', badge:'Mi lista · Ramen', m:'https://maps.google.com/?q=Yamaoto+Menzou+Kyoto', src:'milista' },
+          { n:'Sushi Sakaba Sashisu', d:'Sushi y sashimi en ambiente de sakaba (taberna japonesa). De la lista personal.', stars:2, time:'~1h', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Sushi+Sakaba+Sashisu+Kyoto', src:'milista' },
+          { n:'Itsumabushi', d:'Restaurante japonés en Kioto. De la lista personal.', stars:2, time:'~1h', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Itsumabushi+Kyoto', src:'milista' },
+        ]},
+        { z:'🌿 Paseo del Filósofo — Si sobra tiempo', items:[
+          { n:'Paseo del Filósofo (Tetsugaku-no-michi) + Ginkakuji', d:'Camino de 2 km junto a un canal bordeado de cerezos que conecta el templo Ginkakuji (Pabellón de Plata) con el templo Eikando. Japonismo lo cita como imprescindible de Kioto. El Ginkakuji y el Eikando merecen visita por sí solos.', stars:3, time:'~1h 30min', bt:'must', badge:'Japonismo imprescindible', m:'https://maps.google.com/?q=Philosopher%27s+Path+Kyoto', src:'jap' },
+          { n:'Santuario Heian Jingu', d:'Arquitectura monumental de color rojo fuego y grandes jardines. El torii colosal que precede al santuario es uno de los más grandes de Japón. Japonismo lo cita como imprescindible. Cerca del Paseo del Filósofo.', stars:3, time:'~30 min', bt:'must', badge:'Japonismo imprescindible', m:'https://maps.google.com/?q=Heian+Shrine+Kyoto', src:'jap' },
+          { n:'Templo Nanzen-ji', d:'Ejemplo precioso de arquitectura zen en el este de Kioto. Japonismo lo recomienda por la bella naturaleza que lo rodea. Gran puerta (sanmon) y acueducto de ladrillo integrado en el jardín. Junto al Paseo del Filósofo.', stars:3, time:'~30 min', bt:'must', badge:'Japonismo recomienda', m:'https://maps.google.com/?q=Nanzen-ji+Temple+Kyoto', src:'jap' },
+        ]},
+      ]
+    },
+  ]
+},
+
+// ─────────────────────────────────────────────────────────────
+osaka:{
+  kanji:'大阪', name:'Osaka', dates:'17 Mayo · Día completo desde Kioto',
+  desc:'La ciudad más ruidosa y directa de Japón, donde la gente te para en la calle para preguntarte si la comida está buena. La capital del takoyaki, okonomiyaki y kushikatsu. El Dotonbori de noche con sus neones imposibles es uno de los espectáculos más impactantes de Asia.',
+  days:[
+    { num:17, date:'Domingo 17 Mayo · Excursión completa', title:'Osaka — Castillo · Namba · Dotonbori nocturno',
+      tip:{ t:'🗺 Ruta del día', x:'JR a Osaka mañana → Castillo de Osaka → Umeda Sky Building (opcional) → Shinsaibashi/Amemura → Idaten Wagyu Box (comida) → Shubodai foto → Dotonbori → Nipponbashi/Volks → Dotonbori nocturno → Tren vuelta a Kioto (último ~23h).' },
+      zones:[
+        { z:'🏯 Mañana — Este de Osaka', items:[
+          { n:'Castillo de Osaka ★ — 📸 Foto de mi lista', d:'Uno de los castillos más majestuosos de Japón rodeado de parque. En mayo el jardín de wisteria puede estar florecido. El interior tiene un museo sobre Toyotomi Hideyoshi. Las vistas desde lo alto son espectaculares. De la lista personal para fotos.', stars:3, time:'~1h 15min', bt:'must', badge:'Imprescindible + Foto', m:'https://maps.google.com/?q=Osaka+Castle', src:'milista' },
+        ]},
+        { z:'🌆 Mañana — Norte de Osaka (opcional)', items:[
+          { n:'Umeda Sky Building — Mirador al atardecer', d:'Edificio futurista con escaleras mecánicas "flotantes" que llevan al mirador circular. Las vistas de Osaka, especialmente al atardecer, son impresionantes. En los bajos, el callejón gastronómico Takimi Koji (estilo era Taisho). Algo al norte, compensarlo combinando con Dotonbori de noche.', stars:3, time:'~45 min', bt:'must', badge:'Muy recomendable', m:'https://maps.google.com/?q=Umeda+Sky+Building+Osaka', src:'jap' },
+        ]},
+        { z:'🍱 Comida — Mi lista', items:[
+          { n:'Idaten Wagyu Rice Box ★★', d:'De la lista personal con dirección exacta: 2F Kakou Building, 1-8-20 Namba, Chuo-ku, Osaka. Caja de arroz con wagyu. Una de las comidas más buscadas en Osaka actualmente. Llegar temprano o hacer cola. La dirección es específica.', stars:3, time:'~45 min', bt:'food', badge:'Mi lista ★★', m:'https://maps.google.com/?q=1-8-20+Namba+Chuo-ku+Osaka', src:'milista' },
+          { n:'Kuromon Ichiba — El mercado de cocina de Osaka', d:'"La cocina de Osaka": mercado con puestos de marisco fresco del Pacífico, frutas, carne y comida callejera. Alternativa al Idaten o complemento para picar. Muy auténtico y lleno de locales.', stars:2, time:'~30 min', bt:'food', badge:'Recomendable', m:'https://maps.google.com/?q=Kuromon+Market+Osaka', src:'jap' },
+        ]},
+        { z:'📸 Fotos — Mi lista', items:[
+          { n:'Shubodai — 📸 Localización Instagram', d:'De la lista personal de localizaciones. Zona visual fotogénica de Osaka. Buscar la ubicación exacta en Maps antes de ir.', stars:2, time:'~20 min', bt:'photo', badge:'Mi lista · Foto', m:'https://maps.google.com/?q=Shubodai+Osaka', src:'milista' },
+        ]},
+        { z:'🛍 Compras — Mi lista', items:[
+          { n:'Volks Osaka — Figuras / Warhammer', d:'Referencia japonesa en figuras y miniaturas. La tienda de Osaka está en Nipponbashi (Denden Town), el Akihabara de Osaka: calles llenas de tiendas de manga, anime, electrónica y coleccionismo.', stars:2, time:'~45 min', bt:'shop', badge:'Mi lista · Warhammer', m:'https://maps.google.com/?q=Volks+Osaka+Nipponbashi', src:'milista' },
+          { n:'Samurai Jeans', d:'Marca de denim japonés artesanal fabricado en Japón. La tienda principal está en Osaka. Para los amantes del selvedge denim japonés.', stars:2, time:'~30 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=Samurai+Jeans+Osaka', src:'milista' },
+          { n:'Shinsaibashi-suji — La gran calle comercial', d:'La calle comercial cubierta más famosa de Osaka, paralela al canal de Dotonbori. Más de 600 tiendas bajo una galería. Desde marcas internacionales hasta tiendas de 100 yenes. Imprescindible para pasear y comprar.', stars:2, time:'~45 min', bt:'shop', badge:'Compras', m:'https://maps.google.com/?q=Shinsaibashi+Osaka', src:'jap' },
+        ]},
+        { z:'🌃 Tarde-Noche — Namba y Dotonbori', items:[
+          { n:'Barrio de Shinsekai y Torre Tsutenkaku', d:'Barrio retro nostálgico con cientos de restaurantes especializados en kushikatsu (fritos en palito). La torre Tsutenkaku es uno de los iconos de Osaka. Ambiente muy auténtico y diferente al Namba turístico.', stars:2, time:'~45 min', bt:'must', badge:'Si hay tiempo', m:'https://maps.google.com/?q=Shinsekai+Osaka', src:'jap' },
+          { n:'Dotonbori de noche ★', d:'El canal con los carteles luminosos gigantes (Glico Man corriendo, cangrejo gigante de Kani Doraku). De noche es absolutamente espectacular. Pasear por el malecón y las callejuelas adyacentes, comer takoyaki o okonomiyaki en puestos callejeros. No mojar dos veces la salsa del kushikatsu (regla sagrada de Osaka).', stars:3, time:'~1h 30min', bt:'must', badge:'Imprescindible ⭐', m:'https://maps.google.com/?q=Dotonbori+Osaka', src:'jap' },
+          { n:'Cena libre en Namba / Shinsaibashi', d:'Miles de opciones. Para kushikatsu: Daruma (la cadena original). Para takoyaki: Kukuru o Aizuya. Para okonomiyaki: Fukutaro. O simplemente entrar donde más os apetezca mientras paseáis por Dotonbori.', stars:2, time:'~1h 30min', bt:'food', badge:'Cena libre', m:'https://maps.google.com/?q=Namba+Osaka', src:'jap' },
+        ]},
+      ]
+    },
+  ]
+},
+
+// ─────────────────────────────────────────────────────────────
+tokio:{
+  kanji:'東京', name:'Tokio', dates:'19–23 Mayo · 4 noches · Hotel Higashi Shinjuku',
+  desc:'38 millones de personas, el mejor sushi del mundo, Akihabara, DisneySea, Shibuya de noche, Harajuku y la lista más larga de restaurantes y tiendas de toda tu vida. Organización por barrios próximamente.',
+  days:[
+    { num:19, date:'Martes 19 Mayo · Llegada', title:'Shinkansen → Shinjuku · Shibuya · Cena',
+      zones:[
+        { z:'🌆 Tarde — Shinjuku', items:[
+          { n:'Shinjuku Yataien — 📸 Mi lista', d:'Mercado de puestos estilo festival japonés. Fotogénico y animado. Primera noche en Tokio.', stars:2, time:'~45 min', bt:'photo', badge:'Mi lista · Foto', m:'https://maps.google.com/?q=Shinjuku+Yatai+village+Tokyo', src:'milista' },
+          { n:'Batting Station Shinjuku', d:'Jaulas de bateo en Shinjuku. Velocidades regulables. Muy entretenido de noche. Actividad de pareja de la lista personal.', stars:2, time:'~45 min', bt:'must', badge:'Mi lista · Pareja', m:'https://maps.google.com/?q=Batting+Center+Shinjuku+Tokyo', src:'milista' },
+          { n:'Shibuya de noche — Cruce Scramble', d:'El cruce más famoso del mundo con miles de personas cruzando simultáneamente. Vista aérea desde QFront Starbucks o Shibuya Sky (mirador de pago con vistas 360°).', stars:3, time:'~30 min', bt:'must', badge:'Imprescindible', m:'https://maps.google.com/?q=Shibuya+Crossing+Tokyo', src:'jap' },
+        ]},
+        { z:'🌙 Cena de llegada — Mi lista', items:[
+          { n:'Gyutan No Lemon — Lengua de ternera a la parrilla', d:'Gyutan (lengua de buey) a la parrilla en rodajas finas con limón y sal. Especialidad de Sendai con buenas versiones en Tokio. Una de las proteínas más sabrosas de la cocina japonesa.', stars:2, time:'~1h', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Gyutan+No+Lemon+Tokyo', src:'milista' },
+          { n:"I'm Donut — Japanese Nama Donut", d:'Donuts "nama" (frescos) con textura casi líquida por dentro. Coberturas de matcha, yuzu y más. Tienda de culto en Tokio. Postre de bienvenida.', stars:2, time:'~15 min', bt:'food', badge:'Mi lista · Postre', m:'https://maps.google.com/?q=Im+Donut+Tokyo', src:'milista' },
+        ]},
+      ]
+    },
+    { num:20, date:'Miércoles 20 Mayo · 🎡 Especial', title:'TOKYO DISNEYSEA — Día completo',
+      alert:{ t:'🎡 DisneySea — Consejos', x:'Comprar entradas ANTES en tokyodisneyresort.jp. Miércoles = menos cola. Llegar a la apertura (8–9h). Atracciones: Journey to the Center of the Earth, Indiana Jones, Fantasy Springs. ~¥9.900–11.000/persona.' },
+      zones:[
+        { z:'✅ Acción requerida', items:[
+          { n:'Comprar entradas Tokyo DisneySea online', d:'Web oficial: tokyodisneyresort.jp. Entradas de fecha fija. Pueden agotarse. Comprar lo antes posible.', stars:3, time:'Todo el día', bt:'special', badge:'Reservar antes', m:'https://www.tokyodisneyresort.jp/en/', src:'milista' },
+        ]},
+      ]
+    },
+    { num:21, date:'Jueves 21 Mayo', title:'Harajuku · Meiji · Shibuya · Tokyo Tower',
+      zones:[
+        { z:'🏯 Mañana', items:[
+          { n:'Santuario Meiji Jingu', d:'Gran santuario sintoísta entre un bosque artificial de 70.000 árboles. La calma total en la megalópolis. La puerta Otorii de ciprés japonés es una de las más grandes de Japón.', stars:3, time:'~45 min', bt:'must', badge:'Imprescindible', m:'https://maps.google.com/?q=Meiji+Shrine+Tokyo', src:'jap' },
+          { n:'Harajuku — Takeshita + Omotesando', d:'Epicentro de la moda callejera japonesa. Takeshita: colorida y caótica. Omotesando: el Champs-Élysées japonés con flagship stores. Cat Street: indie y fashion.', stars:3, time:'~1h 30min', bt:'photo', badge:'Mi lista · Foto', m:'https://maps.google.com/?q=Takeshita+Street+Harajuku+Tokyo', src:'milista' },
+          { n:'Ikiiki Playground + parking subterráneo', d:'Localización fotográfica urbana muy buscada de la lista personal. Buscar ubicación exacta en Maps.', stars:2, time:'~20 min', bt:'photo', badge:'Mi lista · Foto', m:'https://maps.google.com/?q=Ikiiki+Playground+Tokyo', src:'milista' },
+        ]},
+        { z:'🛍 Compras — Shibuya y Daikanyama', items:[
+          { n:'Shibuya Flagship Store + #FFFFFT Shirt', d:'Flagships de todas las marcas japonesas en Shibuya. #FFFFFT: marca de camisetas japonesas de culto.', stars:2, time:'~1h', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=%23FFFFFT+Tokyo', src:'milista' },
+          { n:'Evisu Daikanyama', d:'Marca japonesa de denim selvedge que revolucionó la moda callejera. Tienda en el barrio bohemio de Daikanyama, a 10 min de Shibuya.', stars:2, time:'~30 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=Evisu+Daikanyama+Tokyo', src:'milista' },
+          { n:'The Harvest Ebisu', d:'Ropa y accesorios japoneses en Ebisu, junto a Daikanyama. Barrio tranquilo y con encanto.', stars:2, time:'~25 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=The+Harvest+Ebisu+Tokyo', src:'milista' },
+        ]},
+        { z:'🗼 Tokyo Tower — Mi lista', items:[
+          { n:'Tokyo Tower + RISE&WIN Brewing — 📸 Foto', d:'Localización de la lista: foto de la Tokyo Tower desde el puente con la cervecería RISE&WIN Brewing Co. Kamikatz Taproom al fondo. Localización Instagram muy específica y buscada.', stars:3, time:'~30 min', bt:'photo', badge:'Mi lista · Foto ★', m:'https://maps.google.com/?q=RISE+WIN+BREWING+Kamikatz+Tokyo', src:'milista' },
+        ]},
+        { z:'🍽 Comida y cena', items:[
+          { n:'Soufflé Pancakes — Micasadeco & Café', d:'Pancakes soufflé japoneses altísimos, esponjosos y casi líquidos por dentro. Desayuno o merienda de la lista personal.', stars:2, time:'~30 min', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Micasadeco+Cafe+Tokyo', src:'milista' },
+          { n:'Katsu Sando — Pelican Café', d:'Sándwich de cerdo empanado en pan esponjoso japonés con salsa tonkatsu. Clásico de culto en Tokio.', stars:2, time:'~20 min', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Pelican+Cafe+Tokyo', src:'milista' },
+          { n:'Chicken Yakitori Nanbeitei', d:'Yakitori a la brasa en uno de los referentes de Tokio. Pedir: negima (pollo y cebolleta), tsukune (albóndigas) y kawa (piel crujiente).', stars:3, time:'~1h', bt:'food', badge:'Mi lista · Cena', m:'https://maps.google.com/?q=Nanbeitei+Yakitori+Tokyo', src:'milista' },
+          { n:'Soba Maren', d:'Soba artesanal en Tokio. Fideos de trigo sarraceno hechos a mano. De la lista personal.', stars:2, time:'~45 min', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Soba+Maren+Tokyo', src:'milista' },
+        ]},
+      ]
+    },
+    { num:22, date:'Viernes 22 Mayo', title:'Asakusa · Senso-ji · Akihabara · Tiendas Warhammer',
+      zones:[
+        { z:'🌅 Mañana — Asakusa', items:[
+          { n:'Templo Senso-ji ★ — El más antiguo de Tokio', d:'Fundado en el año 628. La puerta Kaminarimon con la linterna roja gigante y la calle Nakamise son iconos absolutos. Llegar 6–7h para fotos sin masas. La pagoda de cinco pisos al fondo completa la postal clásica.', stars:3, time:'~45 min', bt:'must', badge:'Imprescindible ⭐', m:'https://maps.google.com/?q=Senso-ji+Temple+Asakusa+Tokyo', src:'jap' },
+          { n:'Asakusa Taiyaki Guraku', d:'Galleta con forma de pez rellena de judía roja dulce. El desayuno más auténtico en Tokio. De la lista personal.', stars:2, time:'~15 min', bt:'food', badge:'Mi lista · Desayuno', m:'https://maps.google.com/?q=Asakusa+Taiyaki+Guraku', src:'milista' },
+          { n:'Nakamise-dori + Compras Asakusa', d:'La calle de tiendas hacia el Senso-ji. Artesanía auténtica, kimonos de segunda mano y souvenires más baratos y auténticos que en el aeropuerto.', stars:2, time:'~30 min', bt:'shop', badge:'Compras', m:'https://maps.google.com/?q=Nakamise+Dori+Asakusa', src:'jap' },
+          { n:'Nihonbashi Tonkatsu Hajime', d:'Bol de arroz con tonkatsu (cerdo empanado con panko y salsa oscura). En la zona de Nihonbashi, cerca de la estación de Tokio. De la lista personal.', stars:2, time:'~45 min', bt:'food', badge:'Mi lista · Comida', m:'https://maps.google.com/?q=Nihonbashi+Tonkatsu+Hajime+Tokyo', src:'milista' },
+        ]},
+        { z:'🎮 Tarde — Akihabara', items:[
+          { n:'Mandarake Akihabara — Warhammer', d:'Referencia japonesa para manga segunda mano, figuras y artbooks. Varios pisos especializados por categorías muy distintas. Para miniaturas y material de Warhammer.', stars:3, time:'~1h', bt:'shop', badge:'Mi lista · Warhammer', m:'https://maps.google.com/?q=Mandarake+Akihabara+Tokyo', src:'milista' },
+          { n:'Yellow Submarine — Miniaturas', d:'La cadena japonesa más conocida de juegos de mesa, miniaturas y juegos de rol. Tienda principal en Akihabara. Excelente para Warhammer y coleccionismo.', stars:3, time:'~45 min', bt:'shop', badge:'Mi lista · Warhammer', m:'https://maps.google.com/?q=Yellow+Submarine+Akihabara+Tokyo', src:'milista' },
+          { n:'Santuario Kanda Myojin', d:'En pleno Akihabara, santuario con tablillas ema decoradas con imágenes de anime (especialmente Love Live!). Un contraste único entre tradición y cultura otaku. Vale la pena el desvío de 5 min.', stars:2, time:'~15 min', bt:'must', badge:'Recomendable', m:'https://maps.google.com/?q=Kanda+Myojin+Shrine+Tokyo', src:'jap' },
+        ]},
+        { z:'📸 Localización especial', items:[
+          { n:'7Eleven Minato City Shiba 3-Chome — 📸', d:'Localización fotográfica de la lista personal. Probablemente con la Tokyo Tower al fondo. Buscar dirección exacta en Maps.', stars:2, time:'~15 min', bt:'photo', badge:'Mi lista · Foto', m:'https://maps.google.com/?q=7-Eleven+Shiba+3+Minato+City+Tokyo', src:'milista' },
+        ]},
+        { z:'🌙 Cena', items:[
+          { n:'Shoyu Ramen Dame Na Rinjin', d:'Ramen de soja con caldo claro y salado, fideos finos, chashu y menma. De la lista personal.', stars:2, time:'~45 min', bt:'food', badge:'Mi lista · Cena', m:'https://maps.google.com/?q=Dame+Na+Rinjin+Ramen+Tokyo', src:'milista' },
+          { n:'Yaki Uo Ishikawa', d:'Restaurante de pescado a la parrilla en Tokio. De la lista personal.', stars:2, time:'~1h', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Yaki+Uo+Ishikawa+Tokyo', src:'milista' },
+        ]},
+      ]
+    },
+    { num:23, date:'Sábado 23 Mayo · Último día completo', title:'Compras finales — Ginza · Nakano · Shibuya',
+      zones:[
+        { z:'🛍 Mañana — Ginza y Nihonbashi', items:[
+          { n:'Seiko / Mizutani Camera — Ginza', d:'Seiko Flagship: relojes exclusivos del mercado japonés no exportados. Mizutani Camera: cámaras y óptica de segunda mano premium (Leica, Hasselblad...).', stars:2, time:'~45 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=Seiko+Flagship+Ginza+Tokyo', src:'milista' },
+          { n:'Tendon Kanekohannosuke Nihonbashi', d:'El don de tempura (tendon) más famoso de Nihonbashi. La versión premium del tendon japonés sobre arroz. De la lista personal.', stars:3, time:'~45 min', bt:'food', badge:'Mi lista · Comida', m:'https://maps.google.com/?q=Tendon+Kanekohannosuke+Nihonbashi+Tokyo', src:'milista' },
+          { n:'Kappabashi Street — Dengama', d:'La calle donde los restaurantes compran sus utensilios: los mejores cuchillos japoneses del mundo, vajillas, bowls de ramen. Souvenires únicos y funcionales de cocinero.', stars:3, time:'~45 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=Dengama+Kappabashi+Tokyo', src:'milista' },
+        ]},
+        { z:'🎮 Tarde — Nakano Broadway', items:[
+          { n:'Nakano Broadway', d:'El rival underground de Akihabara: pisos llenos de Mandarake especializados por categorías muy específicas (figuras vintage, doujinshi, consolas retro...). Más barato y menos turístico que Akihabara.', stars:3, time:'~1h 30min', bt:'must', badge:'Muy recomendable', m:'https://maps.google.com/?q=Nakano+Broadway+Tokyo', src:'jap' },
+        ]},
+        { z:'🛍 Compras prácticas', items:[
+          { n:'Eye District', d:'Tienda de gafas de diseño japonés único. De la lista personal.', stars:2, time:'~30 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=Eye+District+Tokyo', src:'milista' },
+          { n:'Hanko Japan — Sellos personalizados en kanji', d:'Sello personalizado con tu nombre en kanji: uno de los souvenires más especiales y únicos de Japón. Pedir lo antes posible si requiere tiempo de fabricación.', stars:3, time:'~20 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=Hanko+stamp+custom+Tokyo', src:'milista' },
+          { n:'3Coins + Shupatto (bolsas plegables)', d:'3Coins: todo a ~3€, complementos y regalos. Shupatto: las bolsas plegables compactables enrollándolas, muy funcionales para el equipaje de vuelta.', stars:1, time:'~20 min', bt:'shop', badge:'Mi lista · Compras', m:'https://maps.google.com/?q=3Coins+Tokyo', src:'milista' },
+          { n:'Tonkatsu Marushichi', d:'Tonkatsu en Tokio. Cerdo empanado con panko y salsa oscura, acompañado de col rallada. De la lista personal.', stars:2, time:'~45 min', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Tonkatsu+Marushichi+Tokyo', src:'milista' },
+        ]},
+        { z:'🌙 Última cena en Tokio', items:[
+          { n:'Sushi No Midori', d:'Sushi premium a precios más razonables que el omakase. Puede haber espera. Uno de los favoritos de Tokio.', stars:3, time:'~1h', bt:'food', badge:'Mi lista · Última cena', m:'https://maps.google.com/?q=Sushi+No+Midori+Tokyo', src:'milista' },
+          { n:'Uoshin Nogizaka', d:'Mariscos y sashimi de temporada. Alternativa de calidad para la última noche.', stars:2, time:'~1h', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Uoshin+Nogizaka+Tokyo', src:'milista' },
+          { n:'Hanon Café — Postre final', d:'El postre final del viaje. Matcha, parfait o crepe japonés para cerrar el viaje con dulzura.', stars:2, time:'~20 min', bt:'food', badge:'Mi lista · Postre final', m:'https://maps.google.com/?q=Hanon+Cafe+Tokyo', src:'milista' },
+          { n:'Godaime Hanayama Udon', d:'Udon artesanal de Kagawa. También válido para el desayuno del día 24 si hay tiempo.', stars:2, time:'~30 min', bt:'food', badge:'Mi lista', m:'https://maps.google.com/?q=Godaime+Hanayama+Udon+Tokyo', src:'milista' },
+        ]},
+      ]
+    },
+    { num:24, date:'Domingo 24 Mayo · Regreso', title:'Vuelo salida 13:50 · Narita Express',
+      alert:{ t:'✈ Vuelo 13:50 — Salir del hotel ANTES de las 9:00h', x:"Narita Express (N'EX) desde Shinjuku o Tokio St. ~80min. ¥3.250. Reservar el día 23. Llegar al aeropuerto a las 10:50h mínimo." },
+      zones:[
+        { z:'🌅 Mañana (si hay tiempo)', items:[
+          { n:'We Are The Farm / Godaime Hanayama Udon', d:'Desayuno de despedida si hay tiempo antes del Narita Express.', stars:1, time:'~30 min', bt:'food', badge:'Mi lista · Desayuno', m:'https://maps.google.com/?q=We+Are+The+Farm+Tokyo', src:'milista' },
+          { n:'✅ Narita Express a Narita Airport', d:"Reservar el día 23. Salida del hotel 9h máximo. ¡Buen regreso! 🇪🇸", stars:3, time:'~80 min', bt:'special', badge:'Acción requerida', m:'https://maps.google.com/?q=Narita+Airport+Terminal+1', src:'milista' },
+        ]},
+      ]
+    },
+  ]
+},
+
+}; // end CITIES
+
+// ═══════════════════════════════════════
+// FLATTEN FOR SEARCH
+// ═══════════════════════════════════════
+const ALL_ITEMS = [];
+Object.entries(CITIES).forEach(([ck, city]) => {
+  city.days.forEach(day => {
+    day.zones.forEach(zone => {
+      zone.items.forEach(itm => {
+        ALL_ITEMS.push({ ...itm, ck, cityName: city.name, dayNum: day.num });
+      });
+    });
+  });
+});
+
+// ═══════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════
+let checked = {};
+try { checked = JSON.parse(localStorage.getItem('jp26v3') || '{}'); } catch(e) {}
+let activeFilter = 'all';
+let currentTab = 'hoy';
+
+function saveChecked() { try { localStorage.setItem('jp26v3', JSON.stringify(checked)); } catch(e) {} }
+function ikey(ck, dn, n) { return `${ck}_${dn}_${n.substring(0,25)}`; }
+
+function updateGlobalProg() {
+  const tot = ALL_ITEMS.length;
+  const done = Object.values(checked).filter(Boolean).length;
+  const pct = tot > 0 ? Math.round(done / tot * 100) : 0;
+  document.getElementById('gFill').style.width = pct + '%';
+  document.getElementById('gPct').textContent = pct + '%';
+  document.getElementById('hPct').textContent = pct + '%';
+}
+
+// ═══════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════
+function showTab(tab) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('screen-' + tab).classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+  currentTab = tab;
+  if (tab === 'search') document.getElementById('searchInp').focus();
+}
+
+// ═══════════════════════════════════════
+// FILTERS
+// ═══════════════════════════════════════
+function setFilter(f) {
+  activeFilter = f;
+  document.querySelectorAll('.fil').forEach(b => b.classList.toggle('active', b.dataset.f === f));
+  const cd = document.getElementById('cityDetail');
+  if (cd.classList.contains('active')) applyFilterToDetail();
+  const q = document.getElementById('searchInp').value.trim();
+  if (q) doSearch(q);
+}
+
+function itemMatchesFilter(itm) {
+  if (activeFilter === 'all') return true;
+  if (activeFilter === 'food') return itm.bt === 'food' || itm.bt === 'matcha';
+  if (activeFilter === 'milista') return itm.src === 'milista' || itm.src === 'both';
+  if (activeFilter === 'must') return itm.stars === 3;
+  return itm.bt === activeFilter;
+}
+
+function applyFilterToDetail() {
+  document.querySelectorAll('#cdContent .item').forEach(el => {
+    const bt = el.dataset.bt || '';
+    const src = el.dataset.src || '';
+    const s = parseInt(el.dataset.stars || '0');
+    const fakeItm = { bt, src, stars: s };
+    el.classList.toggle('hidden-filter', !itemMatchesFilter(fakeItm));
+  });
+}
+
+// ═══════════════════════════════════════
+// CITY DETAIL BUILDER
+// ═══════════════════════════════════════
+function buildItem(itm, ck, dayNum) {
+  const k = ikey(ck, dayNum, itm.n);
+  const ischk = checked[k];
+  const bcls = { food:'b-food', must:'b-must', shop:'b-shop', photo:'b-photo', special:'b-special', matcha:'b-matcha', tip:'b-tip', milista:'b-milista' }[itm.bt] || 'b-tip';
+  const starsHtml = `<span class="stars">${'★'.repeat(itm.stars)}${'☆'.repeat(3-itm.stars)}</span>`;
+  const timeHtml = itm.time ? `<span class="time-chip">⏱ ${itm.time}</span>` : '';
+  const show = itemMatchesFilter(itm);
+
+  return `<div class="item${ischk?' checked':''}${show?'':' hidden-filter'}" data-bt="${itm.bt}" data-src="${itm.src}" data-stars="${itm.stars}" onclick="toggleItem(this,'${ck}',${dayNum},'${itm.n.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">
+    <div class="icb"></div>
+    <div class="ibody">
+      <div class="item-meta">${starsHtml}<span class="item-name">${itm.n}</span>${timeHtml}</div>
+      ${itm.d ? `<div class="item-desc">${itm.d}</div>` : ''}
+      <div class="item-foot">
+        ${itm.badge ? `<span class="badge ${bcls}">${itm.badge}</span>` : ''}
+        ${itm.m ? `<a class="maps-btn" href="${itm.m}" target="_blank" onclick="event.stopPropagation()">📍 Abrir en Maps</a>` : ''}
+      </div>
+    </div>
+  </div>`;
+}
+
+function buildSourceDivider(src) {
+  if (src === 'milista') return `<div class="src-divider"><span class="src-label milista">📋 Mi lista</span></div>`;
+  if (src === 'jap') return `<div class="src-divider"><span class="src-label japonismo">🗾 Japonismo recomienda</span></div>`;
+  return '';
+}
+
+function openCity(ck) {
+  const city = CITIES[ck];
+  const el = document.getElementById('cdContent');
+  let html = `
+    <div class="cd-hero">
+      <div class="cd-kan">${city.kanji}</div>
+      <div class="cd-nm">${city.name}</div>
+      <div class="cd-dt">${city.dates}</div>
+      <div class="cd-desc">${city.desc}</div>
+    </div>`;
+
+  city.days.forEach(day => {
+    html += `<div class="day-block open" id="db-${ck}-${day.num}">
+      <div class="day-hdr" onclick="toggleDay('db-${ck}-${day.num}')">
+        <div class="day-num">${day.num}</div>
+        <div class="day-inf">
+          <div class="day-date">${day.date}</div>
+          <div class="day-ttl">${day.title}</div>
+        </div>
+        <div class="day-right">
+          <div class="day-mbar"><div class="day-mfill" id="dmf-${ck}-${day.num}" style="width:0%"></div></div>
+          <div class="day-mpct" id="dmp-${ck}-${day.num}">0%</div>
+          <div class="day-chev">▾</div>
+        </div>
+      </div>
+      <div class="day-body">`;
+
+    if (day.alert) html += `<div class="alert-box"><div class="alert-title">${day.alert.t}</div><div class="alert-text">${day.alert.x}</div></div>`;
+    if (day.tip) html += `<div class="tip-box"><div class="tip-title">${day.tip.t}</div><div class="tip-text">${day.tip.x}</div></div>`;
+
+    day.zones.forEach(zone => {
+      html += `<div class="zone-block"><div class="zone-title">${zone.z}</div></div>`;
+
+      // Group items by source
+      let lastSrc = null;
+      zone.items.forEach(itm => {
+        if (itm.src !== lastSrc && zone.items.length > 1) {
+          const hasMixed = zone.items.some(i => i.src === 'milista') && zone.items.some(i => i.src === 'jap');
+          if (hasMixed) html += buildSourceDivider(itm.src);
+        }
+        lastSrc = itm.src;
+        html += buildItem(itm, ck, day.num);
+      });
+    });
+
+    html += `</div></div>`;
+  });
+
+  el.innerHTML = html;
+  el.scrollTop = 0;
+
+  document.getElementById('mainContent').style.display = 'none';
+  document.getElementById('cityDetail').classList.add('active');
+  document.querySelector('.tabs').style.display = 'none';
+
+  city.days.forEach(day => updateDayProg(ck, day.num));
+}
+
+function closeCity() {
+  document.getElementById('cityDetail').classList.remove('active');
+  document.getElementById('mainContent').style.display = '';
+  document.querySelector('.tabs').style.display = '';
+}
+
+function toggleDay(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+function toggleItem(el, ck, dn, n) {
+  el.classList.toggle('checked');
+  const k = ikey(ck, dn, n);
+  checked[k] = el.classList.contains('checked');
+  saveChecked();
+  updateDayProg(ck, dn);
+  updateGlobalProg();
+}
+
+function updateDayProg(ck, dn) {
+  const block = document.getElementById(`db-${ck}-${dn}`);
+  if (!block) return;
+  const all = block.querySelectorAll('.item');
+  const done = block.querySelectorAll('.item.checked');
+  const pct = all.length > 0 ? Math.round(done.length / all.length * 100) : 0;
+  const f = document.getElementById(`dmf-${ck}-${dn}`);
+  const p = document.getElementById(`dmp-${ck}-${dn}`);
+  if (f) f.style.width = pct + '%';
+  if (p) p.textContent = pct + '%';
+}
+
+// ═══════════════════════════════════════
+// SEARCH
+// ═══════════════════════════════════════
+function doSearch(q) {
+  const wrap = document.getElementById('srWrap');
+  if (!q) {
+    wrap.innerHTML = '<div class="no-res">Escribe en el buscador de arriba<br>para encontrar cualquier lugar 🔍</div>';
+    return;
+  }
+  const ql = q.toLowerCase();
+  let matches = ALL_ITEMS.filter(it =>
+    it.n.toLowerCase().includes(ql) ||
+    (it.d && it.d.toLowerCase().includes(ql)) ||
+    (it.badge && it.badge.toLowerCase().includes(ql)) ||
+    it.cityName.toLowerCase().includes(ql)
+  );
+  if (!itemMatchesFilter({ bt: 'all', src: 'all', stars: 1 })) {
+    matches = matches.filter(it => itemMatchesFilter(it));
+  }
+
+  if (!matches.length) {
+    wrap.innerHTML = `<div class="no-res">Sin resultados para "<strong>${q}</strong>" 🤔<br><span style="font-size:12px;color:var(--t3)">Prueba otro término o quita el filtro</span></div>`;
+    return;
+  }
+
+  const bcls = { food:'b-food', must:'b-must', shop:'b-shop', photo:'b-photo', special:'b-special', matcha:'b-matcha', tip:'b-tip', milista:'b-milista' };
+  wrap.innerHTML = matches.slice(0, 50).map(it => `
+    <div class="sr-item" onclick="openCity('${it.ck}')">
+      <div class="sr-city">Día ${it.dayNum} · ${it.cityName}</div>
+      <div class="sr-meta">
+        <span class="stars" style="font-size:10px">${'★'.repeat(it.stars)}${'☆'.repeat(3-it.stars)}</span>
+        <span class="sr-name">${it.n}</span>
+        ${it.time ? `<span class="time-chip">⏱ ${it.time}</span>` : ''}
+      </div>
+      ${it.d ? `<div class="sr-desc">${it.d.substring(0, 120)}${it.d.length > 120 ? '...' : ''}</div>` : ''}
+      <div class="sr-foot">
+        ${it.badge ? `<span class="badge ${bcls[it.bt] || 'b-tip'}">${it.badge}</span>` : ''}
+        ${it.m ? `<a class="maps-btn" href="${it.m}" target="_blank" onclick="event.stopPropagation()" style="font-size:10px;padding:3px 9px">📍 Maps</a>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+document.getElementById('searchInp').addEventListener('input', function() {
+  const q = this.value.trim();
+  if (q && currentTab !== 'search') showTab('search');
+  doSearch(q);
+});
+
+// ═══════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════
+updateGlobalProg();
+</script>
+</body>
+</html>
