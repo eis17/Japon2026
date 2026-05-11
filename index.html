@@ -22,8 +22,9 @@
   --safe-t:env(safe-area-inset-top,0px); --safe-b:env(safe-area-inset-bottom,0px);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;height:100%;overflow:hidden;overscroll-behavior:none}
-.app{display:flex;flex-direction:column;height:100dvh;height:100vh}
+html{height:-webkit-fill-available}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;height:100%;height:-webkit-fill-available;overflow:hidden;overscroll-behavior:none;position:fixed;width:100%}
+.app{display:flex;flex-direction:column;height:100dvh;height:100vh;height:-webkit-fill-available;overflow:hidden}
 
 /* ── HEADER ── */
 .hdr{padding:calc(var(–safe-t) + 10px) 14px 0;background:var(–bg);border-bottom:1px solid var(–bdr);flex-shrink:0;z-index:20}
@@ -51,9 +52,12 @@ html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-seri
 .fil:active{opacity:.7}
 
 /* ── CONTENT ── */
-.content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
+.content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;min-height:0}
 .screen{display:none}
-.screen.active{display:block;animation:fadeUp .2s ease-out;padding-bottom:calc(var(–safe-b) + 80px)}
+.screen.active{display:block;animation:fadeUp .2s ease-out}
+.screen.active > *:last-child{padding-bottom:calc(var(–safe-b) + 90px) !important}
+/* Fallback por si el último hijo no acepta padding */
+.screen.active::after{content:’’;display:block;height:calc(var(–safe-b) + 90px)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── HOME ── */
@@ -95,7 +99,7 @@ html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-seri
 /* ── CITY DETAIL ── */
 .city-detail{display:none;flex-direction:column;height:100%}
 .city-detail.active{display:flex}
-.city-detail-content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(–safe-b) + 80px)}
+.city-detail-content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;min-height:0;padding-bottom:60px}
 .cd-back{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(–bg);border-bottom:1px solid var(–bdr);cursor:pointer;color:var(–aka);font-size:13px;font-weight:500;flex-shrink:0}
 .cd-hero{background:linear-gradient(160deg,#1a0505 0%,var(–bg) 70%);padding:18px 14px 14px}
 .cd-kan{font-family:‘Shippori Mincho’,serif;font-size:48px;font-weight:800;color:var(–aka);line-height:1}
@@ -1181,6 +1185,12 @@ renderGastos();
 // ═══════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════
+// Añadir espaciador al final de cada pantalla para scroll completo en iOS
+document.querySelectorAll('.screen').forEach(s => {
+  const spacer = document.createElement('div');
+  spacer.style.cssText = 'height:100px;width:100%;display:block;flex-shrink:0';
+  s.appendChild(spacer);
+});
 updateGlobalProg();
 </script>
 
