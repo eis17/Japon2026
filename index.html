@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -6,223 +7,225 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Japón 2026">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#0d0d0d">
 <title>日本 · Japón 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:#ffffff; --bg2:#f8f9fa; --bg3:#f1f3f5; --bg4:#e9ecef;
-  --card:#ffffff; --bdr:rgba(0,0,0,0.08); --bdr2:rgba(0,0,0,0.12);
-  --aka:#d93030; --aka2:#c82323; --kin:#9e7c1a; --kin2:#846512;
-  --moegi:#2d6a44; --moegi2:#3d8a5a; --kon:#2a4a90; --kon2:#3a60b0;
-  --text:#1a1a1a; --t2:rgba(0,0,0,0.65); --t3:rgba(0,0,0,0.35);
+  --bg:#0d0d0d; --bg2:#161616; --bg3:#1f1f1f; --bg4:#272727;
+  --card:#1a1a1a; --bdr:rgba(255,255,255,0.07); --bdr2:rgba(255,255,255,0.13);
+  --aka:#d93030; --aka2:#ff5252; --kin:#c8a030; --kin2:#e8c060;
+  --moegi:#3d8a5a; --moegi2:#5cb87a; --kon:#3a60b0; --kon2:#6090e0;
+  --text:#ede8e0; --t2:rgba(237,232,224,0.55); --t3:rgba(237,232,224,0.28);
   --star:#f0c040;
   --safe-t:env(safe-area-inset-top,0px); --safe-b:env(safe-area-inset-bottom,0px);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;height:100%;overflow:hidden;overscroll-behavior:none}
-.app{display:flex;flex-direction:column;height:100vh;height:100dvh;}
+.app{display:flex;flex-direction:column;height:100dvh;height:100vh}
 
 /* ── HEADER ── */
-.hdr{padding:calc(var(--safe-t) + 10px) 14px 0;background:var(--bg);border-bottom:1px solid var(--bdr);flex-shrink:0;z-index:20}
+.hdr{padding:calc(var(–safe-t) + 10px) 14px 0;background:var(–bg);border-bottom:1px solid var(–bdr);flex-shrink:0;z-index:20}
 .hdr-top{display:flex;align-items:center;gap:10px;padding-bottom:10px}
-.hdr-logo{font-family:'Shippori Mincho',serif;font-size:22px;color:var(--aka);line-height:1;flex-shrink:0}
-.hdr-title{font-size:15px;font-weight:600;color:var(--text);line-height:1.1}
-.hdr-sub{font-size:10px;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase}
+.hdr-logo{font-family:‘Shippori Mincho’,serif;font-size:22px;color:var(–aka);line-height:1;flex-shrink:0}
+.hdr-title{font-size:15px;font-weight:600;color:var(–text);line-height:1.1}
+.hdr-sub{font-size:10px;color:var(–t3);letter-spacing:1.5px;text-transform:uppercase}
 .hdr-prog{display:flex;flex-direction:column;align-items:flex-end;gap:3px;margin-left:auto}
-.prog-bar{width:56px;height:2px;background:var(--bdr2);border-radius:2px;overflow:hidden}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--aka),var(--kin));border-radius:2px;transition:width .5s ease;width:0%}
-.prog-pct{font-size:9px;color:var(--kin);letter-spacing:1px}
+.prog-bar{width:56px;height:2px;background:var(–bdr2);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(–aka),var(–kin));border-radius:2px;transition:width .5s ease;width:0%}
+.prog-pct{font-size:9px;color:var(–kin);letter-spacing:1px}
 
 /* ── SEARCH ── */
 .search-row{padding:8px 14px 10px;position:relative}
 .search-ico{position:absolute;left:26px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none;z-index:1}
-.search-inp{width:100%;background:var(--bg3);border:1px solid var(--bdr2);border-radius:10px;padding:9px 12px 9px 36px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .2s}
-.search-inp:focus{border-color:var(--aka)}
-.search-inp::placeholder{color:var(--t3)}
+.search-inp{width:100%;background:var(–bg3);border:1px solid var(–bdr2);border-radius:10px;padding:9px 12px 9px 36px;color:var(–text);font-family:‘DM Sans’,sans-serif;font-size:14px;outline:none;transition:border-color .2s}
+.search-inp:focus{border-color:var(–aka)}
+.search-inp::placeholder{color:var(–t3)}
 
 /* ── FILTERS ── */
 .filters{display:flex;gap:6px;padding:0 14px 10px;overflow-x:auto;scrollbar-width:none}
 .filters::-webkit-scrollbar{display:none}
-.fil{flex-shrink:0;font-size:11px;font-weight:500;padding:5px 12px;border-radius:20px;border:1px solid var(--bdr2);color:var(--t2);background:transparent;cursor:pointer;transition:all .15s;white-space:nowrap}
-.fil.active{background:var(--aka);border-color:var(--aka);color:#fff}
+.fil{flex-shrink:0;font-size:11px;font-weight:500;padding:5px 12px;border-radius:20px;border:1px solid var(–bdr2);color:var(–t2);background:transparent;cursor:pointer;transition:all .15s;white-space:nowrap}
+.fil.active{background:var(–aka);border-color:var(–aka);color:#fff}
 .fil:active{opacity:.7}
 
 /* ── CONTENT ── */
-.content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain; padding-bottom: 30px;}
+.content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
 .screen{display:none}
-.screen.active{display:block;animation:fadeUp .2s ease-out}
+.screen.active{display:block;animation:fadeUp .2s ease-out;padding-bottom:calc(var(–safe-b) + 80px)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── HOME ── */
-.home-hero{padding:16px 14px 12px;background:linear-gradient(160deg,#1a0808 0%,var(--bg) 65%);position:relative;overflow:hidden}
-.home-hero::after{content:'日';position:absolute;right:-8px;top:-12px;font-family:'Shippori Mincho',serif;font-size:90px;color:rgba(217,48,48,.05);line-height:1;pointer-events:none}
-.home-chip{display:inline-flex;align-items:center;gap:5px;font-size:10px;letter-spacing:2px;color:var(--aka2);text-transform:uppercase;background:rgba(217,48,48,.1);border:1px solid rgba(217,48,48,.2);border-radius:20px;padding:3px 10px;margin-bottom:10px}
-.home-title{font-family:'Shippori Mincho',serif;font-size:22px;font-weight:800;color:var(--text);line-height:1.2}
-.home-sub{font-size:12px;color:var(--t2);margin-top:4px;line-height:1.5}
+.home-hero{padding:16px 14px 12px;background:linear-gradient(160deg,#1a0808 0%,var(–bg) 65%);position:relative;overflow:hidden}
+.home-hero::after{content:‘日’;position:absolute;right:-8px;top:-12px;font-family:‘Shippori Mincho’,serif;font-size:90px;color:rgba(217,48,48,.05);line-height:1;pointer-events:none}
+.home-chip{display:inline-flex;align-items:center;gap:5px;font-size:10px;letter-spacing:2px;color:var(–aka2);text-transform:uppercase;background:rgba(217,48,48,.1);border:1px solid rgba(217,48,48,.2);border-radius:20px;padding:3px 10px;margin-bottom:10px}
+.home-title{font-family:‘Shippori Mincho’,serif;font-size:22px;font-weight:800;color:var(–text);line-height:1.2}
+.home-sub{font-size:12px;color:var(–t2);margin-top:4px;line-height:1.5}
 .home-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
-.home-stat{background:var(--bg3);border:1px solid var(--bdr);border-radius:10px;padding:8px 10px;text-align:center}
-.home-stat .n{font-family:'Shippori Mincho',serif;font-size:18px;font-weight:800;color:var(--kin)}
-.home-stat .l{font-size:9px;color:var(--t3);letter-spacing:1px;text-transform:uppercase;margin-top:1px}
-.sec-lbl{padding:14px 14px 6px;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--t3)}
+.home-stat{background:var(–bg3);border:1px solid var(–bdr);border-radius:10px;padding:8px 10px;text-align:center}
+.home-stat .n{font-family:‘Shippori Mincho’,serif;font-size:18px;font-weight:800;color:var(–kin)}
+.home-stat .l{font-size:9px;color:var(–t3);letter-spacing:1px;text-transform:uppercase;margin-top:1px}
+.sec-lbl{padding:14px 14px 6px;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(–t3)}
 .city-grid{padding:0 14px 6px;display:flex;flex-direction:column;gap:8px}
-.city-card{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;cursor:pointer;transition:border-color .15s,transform .1s}
-.city-card:active{transform:scale(.98);border-color:var(--aka)}
+.city-card{background:var(–card);border:1px solid var(–bdr);border-radius:13px;overflow:hidden;cursor:pointer;transition:border-color .15s,transform .1s}
+.city-card:active{transform:scale(.98);border-color:var(–aka)}
 .city-inner{display:flex;align-items:center;gap:11px;padding:12px 13px}
-.city-kan{font-family:'Shippori Mincho',serif;font-size:30px;font-weight:800;color:var(--aka);line-height:1;min-width:40px;text-align:center}
+.city-kan{font-family:‘Shippori Mincho’,serif;font-size:30px;font-weight:800;color:var(–aka);line-height:1;min-width:40px;text-align:center}
 .city-det{flex:1}
-.city-nm{font-size:15px;font-weight:600;color:var(--text)}
-.city-dt{font-size:10px;color:var(--t3);margin-top:1px}
+.city-nm{font-size:15px;font-weight:600;color:var(–text)}
+.city-dt{font-size:10px;color:var(–t3);margin-top:1px}
 .city-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
-.ctag{font-size:9px;padding:2px 7px;border-radius:6px;background:rgba(255,255,255,.05);color:var(--t2)}
-.ctag.r{background:rgba(217,48,48,.14);color:var(--aka2)}
-.ctag.g{background:rgba(61,138,90,.14);color:var(--moegi2)}
-.ctag.k{background:rgba(200,160,48,.14);color:var(--kin2)}
-.city-arr{color:var(--t3);font-size:16px}
-.tr-mini{margin:0 14px 14px;background:var(--bg2);border:1px solid var(--bdr);border-radius:13px;overflow:hidden}
-.tr-row{display:flex;align-items:center;gap:9px;padding:10px 13px;border-bottom:1px solid var(--bdr);cursor:pointer;transition:background .15s}
+.ctag{font-size:9px;padding:2px 7px;border-radius:6px;background:rgba(255,255,255,.05);color:var(–t2)}
+.ctag.r{background:rgba(217,48,48,.14);color:var(–aka2)}
+.ctag.g{background:rgba(61,138,90,.14);color:var(–moegi2)}
+.ctag.k{background:rgba(200,160,48,.14);color:var(–kin2)}
+.city-arr{color:var(–t3);font-size:16px}
+.tr-mini{margin:0 14px 14px;background:var(–bg2);border:1px solid var(–bdr);border-radius:13px;overflow:hidden}
+.tr-row{display:flex;align-items:center;gap:9px;padding:10px 13px;border-bottom:1px solid var(–bdr);cursor:pointer;transition:background .15s}
 .tr-row:last-child{border-bottom:none}
-.tr-row:active{background:var(--bg3)}
-.tr-day{font-size:10px;color:var(--aka);font-weight:600;min-width:30px}
-.tr-route{font-size:12px;color:var(--text);flex:1}
-.tr-price{font-size:11px;color:var(--kin);font-weight:600}
+.tr-row:active{background:var(–bg3)}
+.tr-day{font-size:10px;color:var(–aka);font-weight:600;min-width:30px}
+.tr-route{font-size:12px;color:var(–text);flex:1}
+.tr-price{font-size:11px;color:var(–kin);font-weight:600}
 .tr-badge{font-size:9px;padding:2px 7px;border-radius:5px;font-weight:600;letter-spacing:.3px}
-.tb-now{background:rgba(217,48,48,.18);color:var(--aka2)}
-.tb-ok{background:rgba(61,138,90,.18);color:var(--moegi2)}
+.tb-now{background:rgba(217,48,48,.18);color:var(–aka2)}
+.tb-ok{background:rgba(61,138,90,.18);color:var(–moegi2)}
 
 /* ── CITY DETAIL ── */
-.city-detail{display:none;flex-direction:column;flex:1;min-height:0;overflow:hidden;}
+.city-detail{display:none;flex-direction:column;height:100%}
 .city-detail.active{display:flex}
-.city-detail-content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:100px;}
-.cd-back{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(--bg);border-bottom:1px solid var(--bdr);cursor:pointer;color:var(--aka);font-size:13px;font-weight:500;flex-shrink:0}
-.cd-hero{background:linear-gradient(160deg,#1a0505 0%,var(--bg) 70%);padding:18px 14px 14px}
-.cd-kan{font-family:'Shippori Mincho',serif;font-size:48px;font-weight:800;color:var(--aka);line-height:1}
-.cd-nm{font-family:'Shippori Mincho',serif;font-size:22px;font-weight:800;color:var(--text);margin-top:3px}
-.cd-dt{font-size:10px;color:var(--t3);letter-spacing:2px;margin-top:3px;text-transform:uppercase}
-.cd-desc{font-size:12px;color:var(--t2);line-height:1.65;margin-top:9px}
+.city-detail-content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(–safe-b) + 80px)}
+.cd-back{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(–bg);border-bottom:1px solid var(–bdr);cursor:pointer;color:var(–aka);font-size:13px;font-weight:500;flex-shrink:0}
+.cd-hero{background:linear-gradient(160deg,#1a0505 0%,var(–bg) 70%);padding:18px 14px 14px}
+.cd-kan{font-family:‘Shippori Mincho’,serif;font-size:48px;font-weight:800;color:var(–aka);line-height:1}
+.cd-nm{font-family:‘Shippori Mincho’,serif;font-size:22px;font-weight:800;color:var(–text);margin-top:3px}
+.cd-dt{font-size:10px;color:var(–t3);letter-spacing:2px;margin-top:3px;text-transform:uppercase}
+.cd-desc{font-size:12px;color:var(–t2);line-height:1.65;margin-top:9px}
 
 /* ── ZONE BLOCKS ── */
 .zone-block{margin:10px 14px 0}
-.zone-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--kin2);font-weight:600;padding:10px 0 6px;border-bottom:1px solid var(--bdr);margin-bottom:2px;display:flex;align-items:center;gap:6px}
-.zone-title::before{content:'';display:inline-block;width:3px;height:12px;background:var(--kin);border-radius:2px;flex-shrink:0}
+.zone-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(–kin2);font-weight:600;padding:10px 0 6px;border-bottom:1px solid var(–bdr);margin-bottom:2px;display:flex;align-items:center;gap:6px}
+.zone-title::before{content:’’;display:inline-block;width:3px;height:12px;background:var(–kin);border-radius:2px;flex-shrink:0}
 
 /* ── DAY BLOCKS ── */
-.day-block{margin:0 14px 9px;background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden}
+.day-block{margin:0 14px 9px;background:var(–card);border:1px solid var(–bdr);border-radius:13px;overflow:hidden}
 .day-hdr{display:flex;align-items:center;gap:11px;padding:12px 13px;cursor:pointer;transition:background .15s}
-.day-hdr:active{background:var(--bg3)}
-.day-num{font-family:'Shippori Mincho',serif;font-size:26px;font-weight:800;color:var(--kin);line-height:1;min-width:32px}
+.day-hdr:active{background:var(–bg3)}
+.day-num{font-family:‘Shippori Mincho’,serif;font-size:26px;font-weight:800;color:var(–kin);line-height:1;min-width:32px}
 .day-inf{flex:1}
-.day-date{font-size:9px;color:var(--aka2);letter-spacing:1px;text-transform:uppercase}
-.day-ttl{font-size:13px;font-weight:600;color:var(--text);margin-top:1px;line-height:1.3}
+.day-date{font-size:9px;color:var(–aka2);letter-spacing:1px;text-transform:uppercase}
+.day-ttl{font-size:13px;font-weight:600;color:var(–text);margin-top:1px;line-height:1.3}
 .day-right{display:flex;align-items:center;gap:7px}
 .day-mbar{width:36px;height:2px;background:rgba(255,255,255,.1);border-radius:1px;overflow:hidden}
-.day-mfill{height:100%;background:var(--kin);border-radius:1px;transition:width .4s}
-.day-mpct{font-size:9px;color:var(--t3);min-width:24px;text-align:right}
-.day-chev{color:var(--t3);font-size:11px;transition:transform .3s}
+.day-mfill{height:100%;background:var(–kin);border-radius:1px;transition:width .4s}
+.day-mpct{font-size:9px;color:var(–t3);min-width:24px;text-align:right}
+.day-chev{color:var(–t3);font-size:11px;transition:transform .3s}
 .day-block.open .day-chev{transform:rotate(180deg)}
 .day-body{display:none;padding-bottom:6px}
 .day-block.open .day-body{display:block}
 
 /* ── SECTION LABEL ── */
-.slbl{padding:9px 13px 3px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--t3);display:flex;align-items:center;gap:7px}
-.slbl::before{content:'';display:inline-block;width:10px;height:1px;background:var(--aka);flex-shrink:0}
+.slbl{padding:9px 13px 3px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(–t3);display:flex;align-items:center;gap:7px}
+.slbl::before{content:’’;display:inline-block;width:10px;height:1px;background:var(–aka);flex-shrink:0}
 
 /* ── SOURCE DIVIDER ── */
 .src-divider{margin:6px 13px 2px;display:flex;align-items:center;gap:8px}
-.src-divider::before,.src-divider::after{content:'';flex:1;height:1px;background:var(--bdr)}
-.src-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--t3);white-space:nowrap;padding:0 4px}
+.src-divider::before,.src-divider::after{content:’’;flex:1;height:1px;background:var(–bdr)}
+.src-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(–t3);white-space:nowrap;padding:0 4px}
 .src-label.milista{color:rgba(200,160,48,.6)}
 .src-label.japonismo{color:rgba(61,138,90,.6)}
 
 /* ── ITEM ── */
-.item{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;cursor:pointer;transition:background .15s;border-top:1px solid var(--bdr)}
-.item:active{background:var(--bg3)}
+.item{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;cursor:pointer;transition:background .15s;border-top:1px solid var(–bdr)}
+.item:active{background:var(–bg3)}
 .item.checked{opacity:.38}
 .item.checked .item-name{text-decoration:line-through}
 .item.hidden-filter{display:none}
-.icb{width:20px;height:20px;border:1.5px solid var(--bdr2);border-radius:5px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .2s;background:transparent}
-.item.checked .icb{background:var(--moegi);border-color:var(--moegi)}
-.item.checked .icb::after{content:'✓';color:#fff;font-size:11px;font-weight:700}
+.icb{width:20px;height:20px;border:1.5px solid var(–bdr2);border-radius:5px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .2s;background:transparent}
+.item.checked .icb{background:var(–moegi);border-color:var(–moegi)}
+.item.checked .icb::after{content:‘✓’;color:#fff;font-size:11px;font-weight:700}
 .ibody{flex:1;min-width:0}
 
 /* ── ITEM META ROW ── */
 .item-meta{display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap}
-.item-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.3}
-.stars{font-size:11px;color:var(--star);letter-spacing:-1px;flex-shrink:0}
-.time-chip{font-size:9px;background:var(--bg4);border:1px solid var(--bdr);border-radius:4px;padding:1px 6px;color:var(--t3);flex-shrink:0}
-.item-desc{font-size:11px;color:var(--t2);line-height:1.55;margin-top:2px}
+.item-name{font-size:13px;font-weight:600;color:var(–text);line-height:1.3}
+.stars{font-size:11px;color:var(–star);letter-spacing:-1px;flex-shrink:0}
+.time-chip{font-size:9px;background:var(–bg4);border:1px solid var(–bdr);border-radius:4px;padding:1px 6px;color:var(–t3);flex-shrink:0}
+.item-desc{font-size:11px;color:var(–t2);line-height:1.55;margin-top:2px}
 .item-foot{display:flex;align-items:center;gap:6px;margin-top:7px;flex-wrap:wrap}
 
 /* ── BADGES ── */
 .badge{font-size:9px;padding:2px 7px;border-radius:5px;font-weight:600;letter-spacing:.3px;text-transform:uppercase}
-.b-food{background:rgba(61,138,90,.15);color:var(--moegi2)}
-.b-must{background:rgba(217,48,48,.15);color:var(--aka2)}
-.b-shop{background:rgba(200,160,48,.15);color:var(--kin2)}
-.b-photo{background:rgba(58,96,176,.15);color:var(--kon2)}
-.b-special{background:var(--aka);color:#fff}
+.b-food{background:rgba(61,138,90,.15);color:var(–moegi2)}
+.b-must{background:rgba(217,48,48,.15);color:var(–aka2)}
+.b-shop{background:rgba(200,160,48,.15);color:var(–kin2)}
+.b-photo{background:rgba(58,96,176,.15);color:var(–kon2)}
+.b-special{background:var(–aka);color:#fff}
 .b-matcha{background:rgba(61,138,90,.2);color:#7dcf9a}
-.b-tip{background:rgba(255,255,255,.06);color:var(--t3)}
-.b-milista{background:rgba(200,160,48,.12);color:var(--kin2);border:1px solid rgba(200,160,48,.25)}
+.b-tip{background:rgba(255,255,255,.06);color:var(–t3)}
+.b-milista{background:rgba(200,160,48,.12);color:var(–kin2);border:1px solid rgba(200,160,48,.25)}
 
 /* ── MAPS BUTTON ── */
-.maps-btn{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;color:#fff;background:var(--kon);border:none;border-radius:8px;padding:5px 12px;text-decoration:none;transition:all .15s;flex-shrink:0}
+.maps-btn{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;color:#fff;background:var(–kon);border:none;border-radius:8px;padding:5px 12px;text-decoration:none;transition:all .15s;flex-shrink:0}
 .maps-btn:active{background:#2a4a90;transform:scale(.97)}
 
 /* ── TIP / ALERT ── */
-.tip-box{margin:7px 13px;background:rgba(200,160,48,.07);border:1px solid rgba(200,160,48,.18);border-left:3px solid var(--kin);border-radius:9px;padding:9px 11px}
-.tip-title{font-size:9px;color:var(--kin);letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;font-weight:700}
-.tip-text{font-size:11px;color:var(--t2);line-height:1.6}
-.alert-box{margin:7px 13px;background:rgba(217,48,48,.07);border:1px solid rgba(217,48,48,.18);border-left:3px solid var(--aka);border-radius:9px;padding:9px 11px}
-.alert-title{font-size:9px;color:var(--aka2);letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;font-weight:700}
-.alert-text{font-size:11px;color:var(--t2);line-height:1.6}
+.tip-box{margin:7px 13px;background:rgba(200,160,48,.07);border:1px solid rgba(200,160,48,.18);border-left:3px solid var(–kin);border-radius:9px;padding:9px 11px}
+.tip-title{font-size:9px;color:var(–kin);letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;font-weight:700}
+.tip-text{font-size:11px;color:var(–t2);line-height:1.6}
+.alert-box{margin:7px 13px;background:rgba(217,48,48,.07);border:1px solid rgba(217,48,48,.18);border-left:3px solid var(–aka);border-radius:9px;padding:9px 11px}
+.alert-title{font-size:9px;color:var(–aka2);letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;font-weight:700}
+.alert-text{font-size:11px;color:var(–t2);line-height:1.6}
 
 /* ── TRANSPORT FULL ── */
 .tr-full{padding:14px}
-.tr-card{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:11px}
-.tr-card-hdr{background:var(--bg2);padding:11px 13px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--bdr)}
-.tr-day-big{font-family:'Shippori Mincho',serif;font-size:22px;font-weight:800;color:var(--kin);min-width:30px}
+.tr-card{background:var(–card);border:1px solid var(–bdr);border-radius:13px;overflow:hidden;margin-bottom:11px}
+.tr-card-hdr{background:var(–bg2);padding:11px 13px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(–bdr)}
+.tr-day-big{font-family:‘Shippori Mincho’,serif;font-size:22px;font-weight:800;color:var(–kin);min-width:30px}
 .tr-hi{flex:1}
-.tr-hdate{font-size:10px;color:var(--t3)}
-.tr-htitle{font-size:13px;font-weight:600;color:var(--text)}
+.tr-hdate{font-size:10px;color:var(–t3)}
+.tr-htitle{font-size:13px;font-weight:600;color:var(–text)}
 .tr-rbadge{font-size:9px;padding:3px 8px;border-radius:6px;font-weight:700;letter-spacing:.3px}
-.rb-yes{background:rgba(217,48,48,.2);color:var(--aka2)}
-.rb-no{background:rgba(61,138,90,.2);color:var(--moegi2)}
-.tr-drow{padding:9px 13px;border-bottom:1px solid var(--bdr)}
+.rb-yes{background:rgba(217,48,48,.2);color:var(–aka2)}
+.rb-no{background:rgba(61,138,90,.2);color:var(–moegi2)}
+.tr-drow{padding:9px 13px;border-bottom:1px solid var(–bdr)}
 .tr-drow:last-child{border-bottom:none}
-.tr-dlbl{font-size:9px;color:var(--t3);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
-.tr-dval{font-size:13px;color:var(--text)}
-.tr-dval.price{color:var(--kin);font-weight:700;font-size:15px}
+.tr-dlbl{font-size:9px;color:var(–t3);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
+.tr-dval{font-size:13px;color:var(–text)}
+.tr-dval.price{color:var(–kin);font-weight:700;font-size:15px}
 .tr-steps{padding:9px 13px}
 .step{display:flex;gap:9px;padding:3px 0;align-items:flex-start}
-.step-dot{width:7px;height:7px;border-radius:50%;background:var(--aka);margin-top:4px;flex-shrink:0;position:relative}
-.step:not(:last-child) .step-dot::after{content:'';position:absolute;top:7px;left:3px;width:1px;height:16px;background:var(--bdr2)}
-.step-txt{font-size:12px;color:var(--t2);line-height:1.4}
+.step-dot{width:7px;height:7px;border-radius:50%;background:var(–aka);margin-top:4px;flex-shrink:0;position:relative}
+.step:not(:last-child) .step-dot::after{content:’’;position:absolute;top:7px;left:3px;width:1px;height:16px;background:var(–bdr2)}
+.step-txt{font-size:12px;color:var(–t2);line-height:1.4}
 
 /* ── SEARCH RESULTS ── */
 .sr-wrap{padding:6px 14px 14px}
-.sr-item{background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:12px 13px;margin-bottom:7px;cursor:pointer;transition:border-color .15s}
-.sr-item:active{border-color:var(--aka)}
-.sr-city{font-size:9px;color:var(--aka2);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
-.sr-name{font-size:14px;font-weight:600;color:var(--text)}
+.sr-item{background:var(–card);border:1px solid var(–bdr);border-radius:12px;padding:12px 13px;margin-bottom:7px;cursor:pointer;transition:border-color .15s}
+.sr-item:active{border-color:var(–aka)}
+.sr-city{font-size:9px;color:var(–aka2);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
+.sr-name{font-size:14px;font-weight:600;color:var(–text)}
 .sr-meta{display:flex;align-items:center;gap:6px;margin-top:3px}
-.sr-desc{font-size:11px;color:var(--t2);margin-top:3px;line-height:1.4}
+.sr-desc{font-size:11px;color:var(–t2);margin-top:3px;line-height:1.4}
 .sr-foot{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap;align-items:center}
-.no-res{text-align:center;padding:40px 20px;color:var(--t3);font-size:14px;line-height:1.8}
+.no-res{text-align:center;padding:40px 20px;color:var(–t3);font-size:14px;line-height:1.8}
 
 /* ── TABS ── */
-.tabs{display:flex;background:var(--bg2);border-top:1px solid var(--bdr);padding-bottom:calc(var(--safe-b) + 4px);flex-shrink:0}
-.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 4px 5px;cursor:pointer;color:var(--t3);transition:color .15s;position:relative}
-.tab.active{color:var(--aka)}
-.tab.active::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:20px;height:2px;background:var(--aka);border-radius:0 0 2px 2px}
+.tabs{display:flex;background:var(–bg2);border-top:1px solid var(–bdr);padding-bottom:calc(var(–safe-b) + 4px);flex-shrink:0}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 4px 5px;cursor:pointer;color:var(–t3);transition:color .15s;position:relative}
+.tab.active{color:var(–aka)}
+.tab.active::before{content:’’;position:absolute;top:0;left:50%;transform:translateX(-50%);width:20px;height:2px;background:var(–aka);border-radius:0 0 2px 2px}
 .tab-ico{font-size:19px;line-height:1}
 .tab-lbl{font-size:9px;letter-spacing:.3px;font-weight:500}
 </style>
+
 </head>
 <body>
 <div class="app">
 
   <!-- HEADER -->
+
   <div class="hdr">
     <div class="hdr-top">
       <div class="hdr-logo">日</div>
@@ -251,72 +254,157 @@ html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-seri
   </div>
 
   <!-- CITY DETAIL OVERLAY -->
+
   <div class="city-detail" id="cityDetail">
     <div class="cd-back" onclick="closeCity()">‹ Volver</div>
     <div class="city-detail-content" id="cdContent"></div>
   </div>
 
   <!-- MAIN CONTENT -->
+
   <div class="content" id="mainContent">
 
-    <!-- HOME -->
-    <div class="screen active" id="screen-hoy">
-      <div class="home-hero">
-        <div class="home-chip">✈ Japón 2026</div>
-        <div class="home-title">Cuaderno de Viaje</div>
-        <div class="home-sub">Toca una ciudad para ver su itinerario completo</div>
-        <div class="home-stats">
-          <div class="home-stat"><div class="n">14</div><div class="l">Días</div></div>
-          <div class="home-stat"><div class="n">6</div><div class="l">Ciudades</div></div>
-          <div class="home-stat"><div class="n" id="hPct">0%</div><div class="l">Hecho</div></div>
+```
+<!-- HOME -->
+<div class="screen active" id="screen-hoy">
+  <div class="home-hero">
+    <div class="home-chip">✈ Japón 2026</div>
+    <div class="home-title">Cuaderno de Viaje</div>
+    <div class="home-sub">Toca una ciudad para ver su itinerario completo</div>
+    <div class="home-stats">
+      <div class="home-stat"><div class="n">14</div><div class="l">Días</div></div>
+      <div class="home-stat"><div class="n">6</div><div class="l">Ciudades</div></div>
+      <div class="home-stat"><div class="n" id="hPct">0%</div><div class="l">Hecho</div></div>
+    </div>
+  </div>
+  <div class="sec-lbl">Ciudades</div>
+  <div class="city-grid">
+    <div class="city-card" onclick="openCity('takayama')"><div class="city-inner"><div class="city-kan">高山</div><div class="city-det"><div class="city-nm">Takayama</div><div class="city-dt">11–12 Mayo · Alpes Japoneses</div><div class="city-tags"><span class="ctag r">Hidagyu ★</span><span class="ctag">Casco Edo</span><span class="ctag k">Sake</span></div></div><div class="city-arr">›</div></div></div>
+    <div class="city-card" onclick="openCity('shirakawa')"><div class="city-inner"><div class="city-kan">白川</div><div class="city-det"><div class="city-nm">Shirakawa-go</div><div class="city-dt">13 Mayo · Escala UNESCO</div><div class="city-tags"><span class="ctag r">UNESCO</span><span class="ctag">Gassho-zukuri</span></div></div><div class="city-arr">›</div></div></div>
+    <div class="city-card" onclick="openCity('kanazawa')"><div class="city-inner"><div class="city-kan">金沢</div><div class="city-det"><div class="city-nm">Kanazawa</div><div class="city-dt">13 noche – 14 Mayo</div><div class="city-tags"><span class="ctag r">Kenroku-en ★</span><span class="ctag k">Pan de oro</span><span class="ctag">Ninjadera</span></div></div><div class="city-arr">›</div></div></div>
+    <div class="city-card" onclick="openCity('kioto')"><div class="city-inner"><div class="city-kan">京都</div><div class="city-det"><div class="city-nm">Kioto</div><div class="city-dt">14–18 Mayo · 4 noches</div><div class="city-tags"><span class="ctag r">Aoi Matsuri 15/5</span><span class="ctag k">Matcha</span><span class="ctag g">Fushimi ★</span></div></div><div class="city-arr">›</div></div></div>
+    <div class="city-card" onclick="openCity('osaka')"><div class="city-inner"><div class="city-kan">大阪</div><div class="city-det"><div class="city-nm">Osaka</div><div class="city-dt">17 Mayo · Excursión día completo</div><div class="city-tags"><span class="ctag r">Dotonbori noche</span><span class="ctag k">Wagyu Box</span></div></div><div class="city-arr">›</div></div></div>
+    <div class="city-card" onclick="openCity('tokio')"><div class="city-inner"><div class="city-kan">東京</div><div class="city-det"><div class="city-nm">Tokio</div><div class="city-dt">19–23 Mayo · 4 noches</div><div class="city-tags"><span class="ctag r">DisneySea 20/5</span><span class="ctag">Akihabara</span><span class="ctag g">Shibuya</span></div></div><div class="city-arr">›</div></div></div>
+  </div>
+  <div class="sec-lbl">Transporte rápido</div>
+  <div class="tr-mini">
+    <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">11/5</div><div class="tr-route">Narita → Takayama</div><div class="tr-price">¥20.500</div><div class="tr-badge tb-ok">Sin reserva</div></div>
+    <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">13/5</div><div class="tr-route">Takayama → Kanazawa (Bus)</div><div class="tr-price">~¥4.500</div><div class="tr-badge tb-now">Reservar</div></div>
+    <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">14/5</div><div class="tr-route">Kanazawa → Kioto (Thunderbird)</div><div class="tr-price">¥7.600</div><div class="tr-badge tb-now">Reservar</div></div>
+    <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">17/5</div><div class="tr-route">Kioto ↔ Osaka (JR Rapid)</div><div class="tr-price">¥580</div><div class="tr-badge tb-ok">Suica</div></div>
+    <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">19/5</div><div class="tr-route">Kioto → Tokio (Nozomi)</div><div class="tr-price">¥14.720</div><div class="tr-badge tb-now">Asiento E</div></div>
+    <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">24/5</div><div class="tr-route">Tokio → Narita (N'EX)</div><div class="tr-price">¥3.250</div><div class="tr-badge tb-now">Día 23</div></div>
+  </div>
+</div>
+
+<!-- TRANSPORT -->
+<div class="screen" id="screen-transport">
+  <div class="tr-full">
+    <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">11</div><div class="tr-hi"><div class="tr-hdate">Dom 11 Mayo · Llegada</div><div class="tr-htitle">Narita → Takayama</div></div><div class="tr-rbadge rb-no">Sin reserva</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Narita Express (N'EX) → Tokio St.</div></div><div class="step"><div class="step-dot"></div><div class="step-txt">Shinkansen Nozomi → Nagoya</div></div><div class="step"><div class="step-dot"></div><div class="step-txt">Ltd. Express Hida → Takayama</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración total</div><div class="tr-dval">~5h 45 min</div></div><div class="tr-drow"><div class="tr-dlbl">Precio por persona</div><div class="tr-dval price">~¥20.500 (~110€)</div></div><div class="tr-drow"><div class="tr-dlbl">Reserva</div><div class="tr-dval">Comprar al llegar en máquinas JR o ventanilla del aeropuerto</div></div></div>
+    <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">13</div><div class="tr-hi"><div class="tr-hdate">Mar 13 Mayo</div><div class="tr-htitle">Takayama → Shirakawa-go → Kanazawa</div></div><div class="tr-rbadge rb-yes">Reservar antes</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Bus Nohi/Kaetsu → Shirakawa-go (~50 min)</div></div><div class="step"><div class="step-dot"></div><div class="step-txt">Bus → Kanazawa (~1h 15 min)</div></div></div><div class="tr-drow"><div class="tr-dlbl">Precio por persona</div><div class="tr-dval price">~¥4.000–5.000</div></div><div class="tr-drow"><div class="tr-dlbl">Reserva</div><div class="tr-dval">Reservar online con antelación: Nohi Bus o Kaetsu Bus</div></div></div>
+    <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">14</div><div class="tr-hi"><div class="tr-hdate">Mié 14 Mayo · tarde</div><div class="tr-htitle">Kanazawa → Kioto</div></div><div class="tr-rbadge rb-yes">2 días antes</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Ltd. Express Thunderbird (directo)</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración</div><div class="tr-dval">~2h 15 min</div></div><div class="tr-drow"><div class="tr-dlbl">Precio por persona</div><div class="tr-dval price">¥7.600 (~41€)</div></div><div class="tr-drow"><div class="tr-dlbl">Reserva</div><div class="tr-dval">2 días antes en cualquier estación JR</div></div></div>
+    <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">17</div><div class="tr-hi"><div class="tr-hdate">Dom 17 Mayo · excursión</div><div class="tr-htitle">Kioto ↔ Osaka</div></div><div class="tr-rbadge rb-no">Sin reserva</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">JR Special Rapid Service (Shinkaisoku)</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración / Precio</div><div class="tr-dval">29 min · <span style="color:var(--kin);font-weight:700">¥580</span> por trayecto</div></div><div class="tr-drow"><div class="tr-dlbl">Pago</div><div class="tr-dval">Tarjeta Suica/Pasmo directamente. Sin reserva.</div></div></div>
+    <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">19</div><div class="tr-hi"><div class="tr-hdate">Mar 19 Mayo</div><div class="tr-htitle">Kioto → Tokio</div></div><div class="tr-rbadge rb-yes">Asiento E (Fuji)</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Shinkansen Nozomi (el más rápido)</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración</div><div class="tr-dval">2h 15 min</div></div><div class="tr-drow"><div class="tr-dlbl">Precio por persona</div><div class="tr-dval price">¥14.720 (~79€)</div></div><div class="tr-drow"><div class="tr-dlbl">Asiento E</div><div class="tr-dval">Lado derecho sentido Tokio. Ver el Monte Fuji al pasar por Shizuoka (~40min desde salida).</div></div></div>
+    <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">20</div><div class="tr-hi"><div class="tr-hdate">Mié 20 Mayo</div><div class="tr-htitle">Tokio → DisneySea</div></div><div class="tr-rbadge rb-no">Sin reserva</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Metro Marunouchi → Tokio St.</div></div><div class="step"><div class="step-dot"></div><div class="step-txt">JR Keiyo Line → Maihama → Bayside Line → DisneySea</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración / Precio</div><div class="tr-dval">~50 min · <span style="color:var(--kin);font-weight:700">~¥500</span></div></div></div>
+    <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">24</div><div class="tr-hi"><div class="tr-hdate">Dom 24 Mayo · vuelo 13:50</div><div class="tr-htitle">Tokio → Narita Airport</div></div><div class="tr-rbadge rb-yes">Reservar día 23</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Narita Express (N'EX) desde Shinjuku o Tokio St.</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración</div><div class="tr-dval">~80 min desde Shinjuku / ~60 min desde Tokio St.</div></div><div class="tr-drow"><div class="tr-dlbl">Precio</div><div class="tr-dval price">¥3.250 (~17€)</div></div><div class="tr-drow"><div class="tr-dlbl">⚠ Salir del hotel antes de las 9:00h</div><div class="tr-dval">Vuelo 13:50 → Llegar al aeropuerto a las 10:50h mínimo</div></div></div>
+  </div>
+</div>
+
+<!-- GASTOS -->
+<div class="screen" id="screen-gastos">
+  <div style="padding:16px 14px 0">
+
+    <!-- RESUMEN GLOBAL -->
+    <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:12px">
+      <div style="background:linear-gradient(135deg,#1a0808,var(--bg2));padding:14px;border-bottom:1px solid var(--bdr)">
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--aka2);margin-bottom:4px">Resumen del viaje</div>
+        <div style="font-family:'Shippori Mincho',serif;font-size:26px;font-weight:800;color:var(--text)" id="totalEur">—€</div>
+        <div style="font-size:11px;color:var(--t2);margin-top:2px" id="totalYen">— ¥ gastados en total</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--bdr)">
+        <div style="padding:10px;text-align:center;border-right:1px solid var(--bdr)">
+          <div style="font-size:15px;font-weight:700;color:var(--kin)" id="sumTransYen">—</div>
+          <div style="font-size:9px;color:var(--t3);margin-top:2px;letter-spacing:1px;text-transform:uppercase">Transporte ¥</div>
+        </div>
+        <div style="padding:10px;text-align:center;border-right:1px solid var(--bdr)">
+          <div style="font-size:15px;font-weight:700;color:var(--moegi2)" id="sumComidaYen">—</div>
+          <div style="font-size:9px;color:var(--t3);margin-top:2px;letter-spacing:1px;text-transform:uppercase">Comida ¥</div>
+        </div>
+        <div style="padding:10px;text-align:center">
+          <div style="font-size:15px;font-weight:700;color:var(--kon2)" id="sumOtrosYen">—</div>
+          <div style="font-size:9px;color:var(--t3);margin-top:2px;letter-spacing:1px;text-transform:uppercase">Otros ¥</div>
         </div>
       </div>
-      <div class="sec-lbl">Ciudades</div>
-      <div class="city-grid">
-        <div class="city-card" onclick="openCity('takayama')"><div class="city-inner"><div class="city-kan">高山</div><div class="city-det"><div class="city-nm">Takayama</div><div class="city-dt">11–12 Mayo · Alpes Japoneses</div><div class="city-tags"><span class="ctag r">Hidagyu ★</span><span class="ctag">Casco Edo</span><span class="ctag k">Sake</span></div></div><div class="city-arr">›</div></div></div>
-        <div class="city-card" onclick="openCity('shirakawa')"><div class="city-inner"><div class="city-kan">白川</div><div class="city-det"><div class="city-nm">Shirakawa-go</div><div class="city-dt">13 Mayo · Escala UNESCO</div><div class="city-tags"><span class="ctag r">UNESCO</span><span class="ctag">Gassho-zukuri</span></div></div><div class="city-arr">›</div></div></div>
-        <div class="city-card" onclick="openCity('kanazawa')"><div class="city-inner"><div class="city-kan">金沢</div><div class="city-det"><div class="city-nm">Kanazawa</div><div class="city-dt">13 noche – 14 Mayo</div><div class="city-tags"><span class="ctag r">Kenroku-en ★</span><span class="ctag k">Pan de oro</span><span class="ctag">Ninjadera</span></div></div><div class="city-arr">›</div></div></div>
-        <div class="city-card" onclick="openCity('kioto')"><div class="city-inner"><div class="city-kan">京都</div><div class="city-det"><div class="city-nm">Kioto</div><div class="city-dt">14–18 Mayo · 4 noches</div><div class="city-tags"><span class="ctag r">Aoi Matsuri 15/5</span><span class="ctag k">Matcha</span><span class="ctag g">Fushimi ★</span></div></div><div class="city-arr">›</div></div></div>
-        <div class="city-card" onclick="openCity('osaka')"><div class="city-inner"><div class="city-kan">大阪</div><div class="city-det"><div class="city-nm">Osaka</div><div class="city-dt">17 Mayo · Excursión día completo</div><div class="city-tags"><span class="ctag r">Dotonbori noche</span><span class="ctag k">Wagyu Box</span></div></div><div class="city-arr">›</div></div></div>
-        <div class="city-card" onclick="openCity('tokio')"><div class="city-inner"><div class="city-kan">東京</div><div class="city-det"><div class="city-nm">Tokio</div><div class="city-dt">19–23 Mayo · 4 noches</div><div class="city-tags"><span class="ctag r">DisneySea 20/5</span><span class="ctag">Akihabara</span><span class="ctag g">Shibuya</span></div></div><div class="city-arr">›</div></div></div>
-      </div>
-      <div class="sec-lbl">Transporte rápido</div>
-      <div class="tr-mini">
-        <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">11/5</div><div class="tr-route">Narita → Takayama</div><div class="tr-price">¥20.500</div><div class="tr-badge tb-ok">Sin reserva</div></div>
-        <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">13/5</div><div class="tr-route">Takayama → Kanazawa (Bus)</div><div class="tr-price">~¥4.500</div><div class="tr-badge tb-now">Reservar</div></div>
-        <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">14/5</div><div class="tr-route">Kanazawa → Kioto (Thunderbird)</div><div class="tr-price">¥7.600</div><div class="tr-badge tb-now">Reservar</div></div>
-        <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">17/5</div><div class="tr-route">Kioto ↔ Osaka (JR Rapid)</div><div class="tr-price">¥580</div><div class="tr-badge tb-ok">Suica</div></div>
-        <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">19/5</div><div class="tr-route">Kioto → Tokio (Nozomi)</div><div class="tr-price">¥14.720</div><div class="tr-badge tb-now">Asiento E</div></div>
-        <div class="tr-row" onclick="showTab('transport')"><div class="tr-day">24/5</div><div class="tr-route">Tokio → Narita (N'EX)</div><div class="tr-price">¥3.250</div><div class="tr-badge tb-now">Día 23</div></div>
+      <div style="padding:10px 14px;display:flex;align-items:center;gap:8px">
+        <span style="font-size:10px;color:var(--t3)">Cambio aplicado:</span>
+        <span style="font-size:11px;color:var(--text);font-weight:600" id="cambioDisplay">1€ = — ¥</span>
+        <button onclick="editCambio()" style="margin-left:auto;font-size:10px;padding:3px 10px;background:var(--bg3);border:1px solid var(--bdr2);border-radius:6px;color:var(--t2);cursor:pointer">Editar</button>
       </div>
     </div>
 
-    <!-- TRANSPORT -->
-    <div class="screen" id="screen-transport">
-      <div class="tr-full">
-        <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">11</div><div class="tr-hi"><div class="tr-hdate">Dom 11 Mayo · Llegada</div><div class="tr-htitle">Narita → Takayama</div></div><div class="tr-rbadge rb-no">Sin reserva</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Narita Express (N'EX) → Tokio St.</div></div><div class="step"><div class="step-dot"></div><div class="step-txt">Shinkansen Nozomi → Nagoya</div></div><div class="step"><div class="step-dot"></div><div class="step-txt">Ltd. Express Hida → Takayama</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración total</div><div class="tr-dval">~5h 45 min</div></div><div class="tr-drow"><div class="tr-dlbl">Precio por persona</div><div class="tr-dval price">~¥20.500 (~110€)</div></div><div class="tr-drow"><div class="tr-dlbl">Reserva</div><div class="tr-dval">Comprar al llegar en máquinas JR o ventanilla del aeropuerto</div></div></div>
-        <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">13</div><div class="tr-hi"><div class="tr-hdate">Mar 13 Mayo</div><div class="tr-htitle">Takayama → Shirakawa-go → Kanazawa</div></div><div class="tr-rbadge rb-yes">Reservar antes</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Bus Nohi/Kaetsu → Shirakawa-go (~50 min)</div></div><div class="step"><div class="step-dot"></div><div class="step-txt">Bus → Kanazawa (~1h 15 min)</div></div></div><div class="tr-drow"><div class="tr-dlbl">Precio por persona</div><div class="tr-dval price">~¥4.000–5.000</div></div><div class="tr-drow"><div class="tr-dlbl">Reserva</div><div class="tr-dval">Reservar online con antelación: Nohi Bus o Kaetsu Bus</div></div></div>
-        <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">14</div><div class="tr-hi"><div class="tr-hdate">Mié 14 Mayo · tarde</div><div class="tr-htitle">Kanazawa → Kioto</div></div><div class="tr-rbadge rb-yes">2 días antes</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Ltd. Express Thunderbird (directo)</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración</div><div class="tr-dval">~2h 15 min</div></div><div class="tr-drow"><div class="tr-dlbl">Precio por persona</div><div class="tr-dval price">¥7.600 (~41€)</div></div><div class="tr-drow"><div class="tr-dlbl">Reserva</div><div class="tr-dval">2 días antes en cualquier estación JR</div></div></div>
-        <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">17</div><div class="tr-hi"><div class="tr-hdate">Dom 17 Mayo · excursión</div><div class="tr-htitle">Kioto ↔ Osaka</div></div><div class="tr-rbadge rb-no">Sin reserva</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">JR Special Rapid Service (Shinkaisoku)</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración / Precio</div><div class="tr-dval">29 min · <span style="color:var(--kin);font-weight:700">¥580</span> por trayecto</div></div><div class="tr-drow"><div class="tr-dlbl">Pago</div><div class="tr-dval">Tarjeta Suica/Pasmo directamente. Sin reserva.</div></div></div>
-        <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">19</div><div class="tr-hi"><div class="tr-hdate">Mar 19 Mayo</div><div class="tr-htitle">Kioto → Tokio</div></div><div class="tr-rbadge rb-yes">Asiento E (Fuji)</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Shinkansen Nozomi (el más rápido)</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración</div><div class="tr-dval">2h 15 min</div></div><div class="tr-drow"><div class="tr-dlbl">Precio por persona</div><div class="tr-dval price">¥14.720 (~79€)</div></div><div class="tr-drow"><div class="tr-dlbl">Asiento E</div><div class="tr-dval">Lado derecho sentido Tokio. Ver el Monte Fuji al pasar por Shizuoka (~40min desde salida).</div></div></div>
-        <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">20</div><div class="tr-hi"><div class="tr-hdate">Mié 20 Mayo</div><div class="tr-htitle">Tokio → DisneySea</div></div><div class="tr-rbadge rb-no">Sin reserva</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Metro Marunouchi → Tokio St.</div></div><div class="step"><div class="step-dot"></div><div class="step-txt">JR Keiyo Line → Maihama → Bayside Line → DisneySea</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración / Precio</div><div class="tr-dval">~50 min · <span style="color:var(--kin);font-weight:700">~¥500</span></div></div></div>
-        <div class="tr-card"><div class="tr-card-hdr"><div class="tr-day-big">24</div><div class="tr-hi"><div class="tr-hdate">Dom 24 Mayo · vuelo 13:50</div><div class="tr-htitle">Tokio → Narita Airport</div></div><div class="tr-rbadge rb-yes">Reservar día 23</div></div><div class="tr-steps"><div class="step"><div class="step-dot"></div><div class="step-txt">Narita Express (N'EX) desde Shinjuku o Tokio St.</div></div></div><div class="tr-drow"><div class="tr-dlbl">Duración</div><div class="tr-dval">~80 min desde Shinjuku / ~60 min desde Tokio St.</div></div><div class="tr-drow"><div class="tr-dlbl">Precio</div><div class="tr-dval price">¥3.250 (~17€)</div></div><div class="tr-drow"><div class="tr-dlbl">⚠ Salir del hotel antes de las 9:00h</div><div class="tr-dval">Vuelo 13:50 → Llegar al aeropuerto a las 10:50h mínimo</div></div></div>
+    <!-- PRESUPUESTO ESTIMADO (del PDF) -->
+    <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--t3);padding:4px 0 8px">Presupuesto estimado (por persona)</div>
+    <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--bdr)">
+        <span style="font-size:13px">🚄</span>
+        <span style="font-size:12px;color:var(--t2);flex:1">Transporte total (estimado)</span>
+        <span style="font-size:13px;color:var(--kin);font-weight:700">¥65.730</span>
+        <span style="font-size:11px;color:var(--t3)">352€</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--bdr)">
+        <span style="font-size:13px">🍱</span>
+        <span style="font-size:12px;color:var(--t2);flex:1">Comidas 14 días (estimado)</span>
+        <span style="font-size:13px;color:var(--kin);font-weight:700">¥83.000</span>
+        <span style="font-size:11px;color:var(--t3)">444€</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:11px 14px">
+        <span style="font-size:13px">✈</span>
+        <span style="font-size:12px;color:var(--t2);flex:1">Vuelos + Hoteles (pagado)</span>
+        <span style="font-size:13px;color:var(--kin);font-weight:700">¥243.100</span>
+        <span style="font-size:11px;color:var(--t3)">1.300€</span>
       </div>
     </div>
 
-    <!-- SEARCH -->
-    <div class="screen" id="screen-search">
-      <div class="sr-wrap" id="srWrap">
-        <div class="no-res">Escribe en el buscador de arriba<br>para encontrar cualquier lugar 🔍</div>
-      </div>
+    <!-- GASTOS REALES — TRANSPORTE -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0 8px">
+      <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--t3)">Transporte — Gastos reales</div>
+      <button onclick="addGasto('transport')" style="font-size:11px;padding:4px 12px;background:var(--aka);border:none;border-radius:8px;color:#fff;cursor:pointer;font-weight:600">+ Añadir</button>
     </div>
+    <div id="list-transport" style="margin-bottom:12px"></div>
+
+    <!-- GASTOS REALES — COMIDA -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0 8px">
+      <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--t3)">Comida — Gastos reales</div>
+      <button onclick="addGasto('comida')" style="font-size:11px;padding:4px 12px;background:var(--moegi);border:none;border-radius:8px;color:#fff;cursor:pointer;font-weight:600">+ Añadir</button>
+    </div>
+    <div id="list-comida" style="margin-bottom:12px"></div>
+
+    <!-- GASTOS REALES — OTROS -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0 8px">
+      <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--t3)">Otros — Entradas, compras, etc.</div>
+      <button onclick="addGasto('otros')" style="font-size:11px;padding:4px 12px;background:var(--kon);border:none;border-radius:8px;color:#fff;cursor:pointer;font-weight:600">+ Añadir</button>
+    </div>
+    <div id="list-otros" style="margin-bottom:12px"></div>
+
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="screen" id="screen-search">
+  <div class="sr-wrap" id="srWrap">
+    <div class="no-res">Escribe en el buscador de arriba<br>para encontrar cualquier lugar 🔍</div>
+  </div>
+</div>
+```
 
   </div><!-- /content -->
 
   <!-- TABS -->
+
   <div class="tabs">
     <div class="tab active" id="tab-hoy" onclick="showTab('hoy')"><div class="tab-ico">🏠</div><div class="tab-lbl">Inicio</div></div>
     <div class="tab" id="tab-transport" onclick="showTab('transport')"><div class="tab-ico">🚄</div><div class="tab-lbl">Transporte</div></div>
+    <div class="tab" id="tab-gastos" onclick="showTab('gastos')"><div class="tab-ico">💴</div><div class="tab-lbl">Gastos</div></div>
     <div class="tab" id="tab-search" onclick="showTab('search')"><div class="tab-ico">🔍</div><div class="tab-lbl">Buscar</div></div>
   </div>
 
@@ -908,13 +996,7 @@ function closeCity() {
 }
 
 function toggleDay(id) {
-  const bloque = document.getElementById(id);
-  bloque.classList.toggle('open');
-
-  // Esto fuerza a la pantalla a seguir al desplegable sin saltos bruscos
-  setTimeout(() => {
-    bloque.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }, 50);
+  document.getElementById(id).classList.toggle('open');
 }
 
 function toggleItem(el, ck, dn, n) {
@@ -987,9 +1069,120 @@ document.getElementById('searchInp').addEventListener('input', function() {
 });
 
 // ═══════════════════════════════════════
+// GASTOS
+// ═══════════════════════════════════════
+let gastos = { transport: [], comida: [], otros: [] };
+let cambio = 187; // 1€ = X yenes (default)
+
+try {
+  const saved = JSON.parse(localStorage.getItem('jp26_gastos') || '{}');
+  if (saved.gastos) gastos = saved.gastos;
+  if (saved.cambio) cambio = saved.cambio;
+} catch(e) {}
+
+function saveGastos() {
+  try { localStorage.setItem('jp26_gastos', JSON.stringify({ gastos, cambio })); } catch(e) {}
+}
+
+const catColor = { transport: 'var(--kin)', comida: 'var(--moegi2)', otros: 'var(--kon2)' };
+const catLabel = { transport: '🚄', comida: '🍱', otros: '🎟' };
+
+function renderGastos() {
+  ['transport', 'comida', 'otros'].forEach(cat => {
+    const el = document.getElementById('list-' + cat);
+    if (!el) return;
+    if (!gastos[cat].length) {
+      el.innerHTML = `<div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:13px;padding:14px;text-align:center;color:var(--t3);font-size:12px">Sin gastos registrados</div>`;
+      return;
+    }
+    el.innerHTML = `<div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:13px;overflow:hidden">` +
+      gastos[cat].map((g, i) => `
+        <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--bdr)">
+          <div style="flex:1">
+            <div style="font-size:12px;font-weight:600;color:var(--text)">${g.desc}</div>
+            <div style="font-size:10px;color:var(--t3);margin-top:2px">Día ${g.dia} · ${g.personas === 2 ? '2 personas' : '1 persona'}</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:13px;font-weight:700;color:${catColor[cat]}">¥${g.yen.toLocaleString()}</div>
+            <div style="font-size:10px;color:var(--t3)">${(g.yen / cambio).toFixed(2)}€</div>
+          </div>
+          <button onclick="deleteGasto('${cat}',${i})" style="background:rgba(217,48,48,.15);border:none;border-radius:6px;padding:4px 8px;color:var(--aka2);cursor:pointer;font-size:11px">✕</button>
+        </div>`).join('') +
+      `<div style="padding:10px 14px;display:flex;justify-content:space-between;align-items:center;background:var(--bg3)">
+        <span style="font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:1px">Total ${cat}</span>
+        <div style="text-align:right">
+          <span style="font-size:14px;font-weight:700;color:${catColor[cat]}">¥${gastos[cat].reduce((s,g)=>s+g.yen,0).toLocaleString()}</span>
+          <span style="font-size:11px;color:var(--t3);margin-left:6px">${(gastos[cat].reduce((s,g)=>s+g.yen,0)/cambio).toFixed(0)}€</span>
+        </div>
+      </div>` +
+    `</div>`;
+  });
+  updateSummary();
+}
+
+function updateSummary() {
+  const tT = gastos.transport.reduce((s,g)=>s+g.yen,0);
+  const tC = gastos.comida.reduce((s,g)=>s+g.yen,0);
+  const tO = gastos.otros.reduce((s,g)=>s+g.yen,0);
+  const total = tT + tC + tO;
+  document.getElementById('totalYen').textContent = `¥${total.toLocaleString()} gastados en total`;
+  document.getElementById('totalEur').textContent = `${(total/cambio).toFixed(0)}€`;
+  document.getElementById('sumTransYen').textContent = tT ? `¥${tT.toLocaleString()}` : '—';
+  document.getElementById('sumComidaYen').textContent = tC ? `¥${tC.toLocaleString()}` : '—';
+  document.getElementById('sumOtrosYen').textContent = tO ? `¥${tO.toLocaleString()}` : '—';
+  document.getElementById('cambioDisplay').textContent = `1€ = ${cambio} ¥`;
+}
+
+function addGasto(cat) {
+  const desc = prompt('¿Qué gasto? (ej: Shinkansen Kioto-Tokio)');
+  if (!desc) return;
+  const yenStr = prompt('¿Cuántos yenes? (total por 2 personas)');
+  if (!yenStr) return;
+  const yen = parseInt(yenStr.replace(/[^0-9]/g,''));
+  if (isNaN(yen) || yen <= 0) { alert('Importe no válido'); return; }
+  const dia = prompt('¿Día? (ej: 19)') || '—';
+  gastos[cat].push({ desc, yen, dia, personas: 2 });
+  saveGastos();
+  renderGastos();
+}
+
+function deleteGasto(cat, i) {
+  if (!confirm('¿Eliminar este gasto?')) return;
+  gastos[cat].splice(i, 1);
+  saveGastos();
+  renderGastos();
+}
+
+function editCambio() {
+  const val = prompt(`Tipo de cambio actual (yenes por 1€)\nActual: ${cambio}`);
+  if (!val) return;
+  const n = parseFloat(val.replace(',','.'));
+  if (isNaN(n) || n <= 0) { alert('Valor no válido'); return; }
+  cambio = n;
+  saveGastos();
+  renderGastos();
+}
+
+// ─── Cargar primer gasto ya registrado ───
+gastos.transport.push({ desc: 'Transporte día 11 — Narita → Takayama (varios trenes)', yen: 38500, dia: 11, personas: 2 });
+// Solo si no estaba ya guardado
+try {
+  const saved = JSON.parse(localStorage.getItem('jp26_gastos') || '{}');
+  if (saved.gastos && saved.gastos.transport && saved.gastos.transport.length > 0) {
+    gastos.transport = saved.gastos.transport;
+  }
+} catch(e) {}
+// Aplicar cambio Revolut real del primer gasto
+cambio = parseFloat((38500 / 209.38).toFixed(2)); // 183.89 aprox
+
+saveGastos();
+renderGastos();
+
+// ═══════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════
 updateGlobalProg();
 </script>
+
 </body>
 </html>
