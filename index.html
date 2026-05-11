@@ -7,24 +7,23 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Japón 2026">
-<meta name="theme-color" content="#0d0d0d">
+<meta name="theme-color" content="#ffffff">
 <title>日本 · Japón 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:#0d0d0d; --bg2:#161616; --bg3:#1f1f1f; --bg4:#272727;
-  --card:#1a1a1a; --bdr:rgba(255,255,255,0.07); --bdr2:rgba(255,255,255,0.13);
-  --aka:#d93030; --aka2:#ff5252; --kin:#c8a030; --kin2:#e8c060;
-  --moegi:#3d8a5a; --moegi2:#5cb87a; --kon:#3a60b0; --kon2:#6090e0;
-  --text:#ede8e0; --t2:rgba(237,232,224,0.55); --t3:rgba(237,232,224,0.28);
+  --bg:#ffffff; --bg2:#f8f9fa; --bg3:#f1f3f5; --bg4:#e9ecef;
+  --card:#ffffff; --bdr:rgba(0,0,0,0.08); --bdr2:rgba(0,0,0,0.12);
+  --aka:#d93030; --aka2:#c82323; --kin:#9e7c1a; --kin2:#846512;
+  --moegi:#2d6a44; --moegi2:#3d8a5a; --kon:#2a4a90; --kon2:#3a60b0;
+  --text:#1a1a1a; --t2:rgba(0,0,0,0.65); --t3:rgba(0,0,0,0.35);
   --star:#f0c040;
   --safe-t:env(safe-area-inset-top,0px); --safe-b:env(safe-area-inset-bottom,0px);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{height:-webkit-fill-available}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;height:100%;height:-webkit-fill-available;overflow:hidden;overscroll-behavior:none;position:fixed;width:100%}
-.app{display:flex;flex-direction:column;height:100dvh;height:100vh;height:-webkit-fill-available;overflow:hidden}
+html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;height:100%;overflow:hidden;overscroll-behavior:none}
+.app{display:flex;flex-direction:column;height:100vh;height:100dvh;}
 
 /* ── HEADER ── */
 .hdr{padding:calc(var(–safe-t) + 10px) 14px 0;background:var(–bg);border-bottom:1px solid var(–bdr);flex-shrink:0;z-index:20}
@@ -52,12 +51,9 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;hei
 .fil:active{opacity:.7}
 
 /* ── CONTENT ── */
-.content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;min-height:0}
+.content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;padding-bottom:30px;}
 .screen{display:none}
 .screen.active{display:block;animation:fadeUp .2s ease-out}
-.screen.active > *:last-child{padding-bottom:calc(var(–safe-b) + 90px) !important}
-/* Fallback por si el último hijo no acepta padding */
-.screen.active::after{content:’’;display:block;height:calc(var(–safe-b) + 90px)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── HOME ── */
@@ -97,9 +93,9 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;hei
 .tb-ok{background:rgba(61,138,90,.18);color:var(–moegi2)}
 
 /* ── CITY DETAIL ── */
-.city-detail{display:none;flex-direction:column;height:100%}
+.city-detail{display:none;flex-direction:column;flex:1;min-height:0;overflow:hidden;}
 .city-detail.active{display:flex}
-.city-detail-content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;min-height:0;padding-bottom:60px}
+.city-detail-content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:100px;}
 .cd-back{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(–bg);border-bottom:1px solid var(–bdr);cursor:pointer;color:var(–aka);font-size:13px;font-weight:500;flex-shrink:0}
 .cd-hero{background:linear-gradient(160deg,#1a0505 0%,var(–bg) 70%);padding:18px 14px 14px}
 .cd-kan{font-family:‘Shippori Mincho’,serif;font-size:48px;font-weight:800;color:var(–aka);line-height:1}
@@ -1000,7 +996,11 @@ function closeCity() {
 }
 
 function toggleDay(id) {
-  document.getElementById(id).classList.toggle('open');
+  const bloque = document.getElementById(id);
+  bloque.classList.toggle('open');
+  setTimeout(() => {
+    bloque.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 50);
 }
 
 function toggleItem(el, ck, dn, n) {
@@ -1185,12 +1185,6 @@ renderGastos();
 // ═══════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════
-// Añadir espaciador al final de cada pantalla para scroll completo en iOS
-document.querySelectorAll('.screen').forEach(s => {
-  const spacer = document.createElement('div');
-  spacer.style.cssText = 'height:100px;width:100%;display:block;flex-shrink:0';
-  s.appendChild(spacer);
-});
 updateGlobalProg();
 </script>
 
